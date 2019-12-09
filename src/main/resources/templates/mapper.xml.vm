@@ -37,7 +37,7 @@
 
     #end
 
-    <!-- 查找详情 -->
+    <!-- 查找详情 ${cfg.nowTime}-->
     <select id="getById" resultType="${package.Entity}.${entity}Po">
         SELECT
 #foreach($field in ${table.commonFields})
@@ -59,7 +59,7 @@
     #end
     </select>
 
-    <!-- 查找列表 -->
+    <!-- 查找列表 ${cfg.nowTime}-->
     <select id="getList" resultType="${cfg.vo}.${entity}ListVo">
         SELECT
 #foreach($field in ${table.commonFields})

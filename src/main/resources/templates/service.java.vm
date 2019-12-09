@@ -22,36 +22,36 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
 
         /**
          * @Desc: 添加一个${entity}Po实体
-         * @Author: CY
-         * @Date: 2019/12/2 9:39
+         * @author ${author}
+         * @since ${date}
          */
         ResultUtils<Boolean> add(${entity}Po ${table.entityPath});
 
         /**
          * @Desc: 根据id 查找一个${entity}Po 实体
-         * @Author: CY
-         * @Date: 2019/12/2 9:39
+         * @author ${author}
+         * @since ${date}
          */
         ResultUtils<Boolean> deleteById(Long id);
 
         /**
          * @Desc: 根据id 更新一个${entity}Po 实体
-         * @Author: CY
-         * @Date: 2019/12/2 9:39
+         * @author ${author}
+         * @since ${date}
          */
         ResultUtils<Boolean> updById(${entity}Po ${table.entityPath});
 
         /**
          * @Desc: 根据id 查找一个 ${entity}Po 实体
-         * @Author: CY
-         * @Date: 2019/12/2 9:40
+         * @author ${author}
+         * @since ${date}
          */
         ResultUtils<${entity}Po> selectById(Long id);
 
         /**
          * @Desc: 分页查找 ${entity}Po 列表
-         * @Author: CY
-         * @Date: 2019/12/2 9:40
+         * @author ${author}
+         * @since ${date}
          */
         ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
 

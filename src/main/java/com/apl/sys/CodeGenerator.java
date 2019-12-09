@@ -9,10 +9,8 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class CodeGenerator {
 
@@ -132,6 +130,8 @@ public class CodeGenerator {
                 Map<String , Object> map = new HashMap<>();
                 map.put("vo" , PACKAGE_NAME + "." +  MODULE_NAME + ".vo");
                 map.put("dto" , PACKAGE_NAME + "." +  MODULE_NAME + ".dto");
+                map.put("nowTime" , new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())));
+                map.put("author" , AUTHOR);
                 setMap(map);
 
             }
