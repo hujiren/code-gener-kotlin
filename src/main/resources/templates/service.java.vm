@@ -25,14 +25,8 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> add(${entity}Po ${table.entityPath});
+        ResultUtils<Integer> add(${entity}Po ${table.entityPath});
 
-        /**
-         * @Desc: 根据id 查找一个${entity}Po 实体
-         * @author ${author}
-         * @since ${date}
-         */
-        ResultUtils<Boolean> deleteById(Long id);
 
         /**
          * @Desc: 根据id 更新一个${entity}Po 实体
@@ -40,6 +34,15 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @since ${date}
          */
         ResultUtils<Boolean> updById(${entity}Po ${table.entityPath});
+
+
+        /**
+         * @Desc: 根据id 查找一个${entity}Po 实体
+         * @author ${author}
+         * @since ${date}
+         */
+        ResultUtils<Boolean> delById(Long id);
+
 
         /**
          * @Desc: 根据id 查找一个 ${entity}Po 实体
@@ -55,5 +58,5 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          */
         ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
 
-        }
+}
 #end

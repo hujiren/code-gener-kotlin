@@ -34,32 +34,51 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Po> implements ${table.serviceName} {
 
     @Override
-    public ResultUtils<Boolean> add(${entity}Po ${table.entityPath}){
+    public ResultUtils<Integer> add(${entity}Po ${table.entityPath}){
 
-        return ResultUtils.SUCCESS(save(${table.entityPath}));
+        Integer flag = baseMapper.insert(${table.entityPath});
+        if(flag.equals(1)){
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}.getId());
+        }
+
+        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null);
     }
 
-    @Override
-    public ResultUtils<Boolean> deleteById(Long id){
-
-        return ResultUtils.SUCCESS(removeById(id));
-    }
 
     @Override
     public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}){
 
-        return ResultUtils.SUCCESS(updateById(${table.entityPath}));
+        Integer flag = baseMapper.updateById(${table.entityPath});
+        if(flag.equals(1)){
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , flag);
+        }
+
+        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , flag);
+    }
+
+
+    @Override
+    public ResultUtils<Boolean> delById(Long id){
+
+        boolean flag = removeById(id);
+        if(flag){
+            return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , flag);
+        }
+
+        return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , flag);
     }
 
     @Override
     public ResultUtils<${entity}Po> selectById(Long id){
 
-        return ResultUtils.SUCCESS(getById(id));
+        ${entity}Po ${table.entityPath} = getById(id);
+
+        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, ${table.entityPath});
     }
 
 
     @Override
-    public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto , ${entity}KeyDto keyDto){
+    public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto, ${entity}KeyDto keyDto){
 
         Page<${entity}ListVo> page = new Page();
         page.setCurrent(pageDto.getPageIndex());
@@ -67,6 +86,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
         List<${entity}ListVo> list = baseMapper.getList(page , keyDto);
         page.setRecords(list);
+
         return ResultUtils.SUCCESS(page);
     }
 
