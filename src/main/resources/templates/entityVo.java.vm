@@ -3,17 +3,12 @@ package ${cfg.vo};
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
-#if(${swagger2})
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-#end
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Min;
 #if(${entityLombokModel})
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 ## -----   导入 Accessors 去除   ----- import lombok.experimental.Accessors;
 #end
+import java.io.Serializable;
 
 /**
  * <p>
@@ -32,7 +27,7 @@ import lombok.EqualsAndHashCode;
 #end
 ## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
-public class ${entity}Vo implements Serializable {
+public class ${entity}ListVo implements Serializable {
 
 
 #if(${entitySerialVersionUID})
@@ -63,7 +58,7 @@ private static final long serialVersionUID=1L;
     }
 
 #if(${entityBuilderModel})
-    public ${entity}Vo set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public ${entity}ListVo set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
 #else
     public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
 #end
@@ -84,7 +79,7 @@ private static final long serialVersionUID=1L;
 #if(!${entityLombokModel})
     @Override
     public String toString() {
-        return "${entity}Vo{" +
+        return "${entity}ListVo{" +
 #foreach($field in ${table.fields})
 #if($!{foreach.index}==0)
         "${field.propertyName}=" + ${field.propertyName} +

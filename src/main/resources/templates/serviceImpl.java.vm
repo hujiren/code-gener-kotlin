@@ -8,8 +8,8 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 
 import ${package.Entity}.${entity}Po;
-import ${cfg.vo}.${entity}Vo;
-import ${cfg.dto}.${entity}Dto;
+import ${cfg.vo}.${entity}ListVo;
+import ${cfg.dto}.${entity}KeyDto;
 
 import java.util.List;
 import com.apl.common.pojo.dto.PageDto;
@@ -59,13 +59,13 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<Page<${entity}Vo>> getList(PageDto pageDto , ${entity}Dto keyDto){
+    public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto , ${entity}KeyDto keyDto){
 
-        Page<${entity}Vo> page = new Page();
+        Page<${entity}ListVo> page = new Page();
         page.setCurrent(pageDto.getPageIndex());
         page.setSize(pageDto.getPageSize());
 
-        List<${entity}Vo> list = baseMapper.getList(page , keyDto);
+        List<${entity}ListVo> list = baseMapper.getList(page , keyDto);
         page.setRecords(list);
         return ResultUtils.SUCCESS(page);
     }

@@ -1,8 +1,8 @@
 package ${package.Mapper};
 
 import ${package.Entity}.${entity}Po;
-import ${cfg.vo}.${entity}Vo;
-import ${cfg.dto}.${entity}Dto;
+import ${cfg.vo}.${entity}ListVo;
+import ${cfg.dto}.${entity}KeyDto;
 import ${superMapperClassPackage};
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -33,7 +33,7 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Po> {
      * @Author: CY
      * @Date: 2019/12/7 10:23
      */
-    List<${entity}Vo> getList(Page page, @Param("kd") ${entity}Dto keyDto);
+    List<${entity}ListVo> getList(Page page, @Param("kd") ${entity}KeyDto keyDto);
 
 }
 #end

@@ -60,7 +60,7 @@
     </select>
 
     <!-- 查找列表 -->
-    <select id="getList" resultType="${cfg.vo}.${entity}Vo">
+    <select id="getList" resultType="${cfg.vo}.${entity}ListVo">
         SELECT
 #foreach($field in ${table.commonFields})
         #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,

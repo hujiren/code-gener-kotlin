@@ -58,16 +58,16 @@ private static final long serialVersionUID=1L;
 #if(${swagger2})
     @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}" , required = true)
     #if("${field.columnType}" == "STRING")
-    @NotEmpty(message = "${field.comment}")
+    @NotEmpty(message = "${field.comment} 不能为空")
     #end
     #if("${field.columnType}" == "INTEGER")
-    @Min(value = 0 , message = "${field.comment}")
+    @Min(value = 0 , message = "${field.comment} 不能小于0")
     #end
     #if("${field.columnType}" == "BIG_DECIMAL")
-    @Min(value = 0 , message = "${field.comment}")
+    @Min(value = 0 , message = "${field.comment} 不能小于0")
     #end
     #if("${field.columnType}" == "LONG")
-    @Min(value = 0 , message = "${field.comment}")
+    @Min(value = 0 , message = "${field.comment} 不能小于1")
     #end
 #else
     /**

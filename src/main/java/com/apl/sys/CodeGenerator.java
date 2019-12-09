@@ -143,14 +143,14 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/vo/"+ tableInfo.getEntityName() + "Vo.java";
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/vo/"+ tableInfo.getEntityName() + "ListVo.java";
             }
         });
        focList.add(new FileOutConfig("/templates/entityDto.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/dto/"+ tableInfo.getEntityName() + "Dto.java";
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/dto/"+ tableInfo.getEntityName() + "KeyDto.java";
             }
         });
        focList.add(new FileOutConfig("/templates/entity.java.vm") {
