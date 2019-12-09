@@ -45,7 +45,7 @@ public class ${table.controllerName} {
 
 
     @PostMapping(value = "/add")
-    @ApiOperation(value =  "添加 $!{table.comment}" , notes = "添加一个 $!{table.comment} ")
+    @ApiOperation(value =  "添加" , notes = "添加 ")
     public ResultUtils<Boolean> add(@Validated ${entity}Po ${table.entityPath}) {
 
         return ${table.entityPath}Service.add(${table.entityPath});
@@ -54,8 +54,8 @@ public class ${table.controllerName} {
 
 
     @PostMapping(value = "/del")
-    @ApiOperation(value =  "删除一个 $!{table.comment}" , notes = "根据id 删除一个 $!{table.comment}")
-    @ApiImplicitParam(name = "id",value = "${table.entityPath} 的 id",required = true  , paramType = "long")
+    @ApiOperation(value =  "删除" , notes = "删除")
+    @ApiImplicitParam(name = "id",value = " id",required = true  , paramType = "long")
     public ResultUtils<Boolean> delById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
         return ${table.entityPath}Service.deleteById(id);
@@ -63,7 +63,7 @@ public class ${table.controllerName} {
 
 
     @PostMapping(value = "/upd")
-    @ApiOperation(value =  "更新 $!{table.comment}" , notes = "根据id 更新 $!{table.comment}")
+    @ApiOperation(value =  "更新" , notes = "更新")
     public ResultUtils<Boolean> updById(@Validated ${entity}Po ${table.entityPath}Po) {
 
         return ${table.entityPath}Service.updById(${table.entityPath}Po);
@@ -71,15 +71,15 @@ public class ${table.controllerName} {
 
 
     @PostMapping(value = "/get")
-    @ApiOperation(value =  "查找 $!{table.comment}" , notes = "根据id 查找 $!{table.comment}")
-    @ApiImplicitParam(name = "id",value = "${table.entityPath} 的 id",required = true  , paramType = "long")
+    @ApiOperation(value =  "获取详细" , notes = "获取详细")
+    @ApiImplicitParam(name = "id",value = "id",required = true  , paramType = "long")
     public ResultUtils<${entity}Po> getById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
             return ${table.entityPath}Service.selectById(id);
     }
 
     @PostMapping("/get-list")
-    @ApiOperation(value =  "分页查找 $!{table.comment}" , notes = "分页查找 $!{table.comment}")
+    @ApiOperation(value =  "分页查找" , notes = "分页查找")
     public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto, @Validated ${entity}KeyDto keyDto) {
 
 
