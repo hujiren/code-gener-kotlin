@@ -11,7 +11,6 @@ import ${package.Entity}.${entity}Po;
 import ${cfg.vo}.${entity}Vo;
 import ${cfg.dto}.${entity}Dto;
 
-import java.io.Serializable;
 import java.util.List;
 import com.apl.common.pojo.dto.PageDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -41,7 +40,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public ResultUtils<Boolean> deleteById(Serializable id){
+    public ResultUtils<Boolean> deleteById(Long id){
 
         return ResultUtils.SUCCESS(removeById(id));
     }
@@ -53,7 +52,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public ResultUtils<${entity}Po> selectById(Serializable id){
+    public ResultUtils<${entity}Po> selectById(Long id){
 
         return ResultUtils.SUCCESS(getById(id));
     }

@@ -32,13 +32,8 @@ import lombok.EqualsAndHashCode;
 #end
 ## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
-#if(${superEntityClass})
-public class ${entity}Vo extends ${superEntityClass}#if(${activeRecord})<${entity}Vo>#end {
-#elseif(${activeRecord})
-public class ${entity}Vo extends Model<${entity}Vo> {
-#else
 public class ${entity}Vo implements Serializable {
-#end
+
 
 #if(${entitySerialVersionUID})
 private static final long serialVersionUID=1L;

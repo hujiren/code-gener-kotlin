@@ -5,7 +5,6 @@ import ${package.Entity}.${entity}Po;
 import ${cfg.vo}.${entity}Vo;
 import ${cfg.dto}.${entity}Dto;
 import ${superServiceClassPackage};
-import java.io.Serializable;
 import com.apl.common.pojo.dto.PageDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
@@ -33,7 +32,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @Author: CY
          * @Date: 2019/12/2 9:39
          */
-        ResultUtils<Boolean> deleteById(Serializable id);
+        ResultUtils<Boolean> deleteById(Long id);
 
         /**
          * @Desc: 根据id 更新一个${entity}Po 实体
@@ -47,7 +46,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @Author: CY
          * @Date: 2019/12/2 9:40
          */
-        ResultUtils<${entity}Po> selectById(Serializable id);
+        ResultUtils<${entity}Po> selectById(Long id);
 
         /**
          * @Desc: 分页查找 ${entity}Po 列表

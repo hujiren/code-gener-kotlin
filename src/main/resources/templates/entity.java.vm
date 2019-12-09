@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 #end
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Min;
+import com.baomidou.mybatisplus.annotation.TableName;
 #if(${entityLombokModel})
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,9 +33,7 @@ import lombok.EqualsAndHashCode;
 #end
 ## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
-#if(${table.convert})
 @TableName("${table.name}")
-#end
 #if(${swagger2})
 @ApiModel(value="${entity}Po对象", description="$!{table.comment}")
 #end
