@@ -33,6 +33,22 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 #else
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Po> implements ${table.serviceName} {
 
+    //状态code枚举
+    public enum ${table.serviceName}Code {
+
+        ;
+
+        private String code;
+        private String msg;
+
+        ${table.serviceName}Code(String code, String msg) {
+             this.code = code;
+             this.msg = msg;
+        }
+    }
+
+
+
     @Override
     public ResultUtils<Integer> add(${entity}Po ${table.entityPath}){
 
