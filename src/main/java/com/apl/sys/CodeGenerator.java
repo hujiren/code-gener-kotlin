@@ -15,16 +15,16 @@ import java.util.*;
 public class CodeGenerator {
 
 
-    public static final String AUTHOR = "CY";
+    public static final String AUTHOR = "arran";
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/apl_devops?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
-    public static final String PACKAGE_NAME = "com.apl.wms";
-    public static final String CHILD_MODULE= "/apl-wms-wh-service";
-    public static final String MODULE_NAME = "wh";
+    public static final String PACKAGE_NAME = "com.apl";
+    public static final String CHILD_MODULE= "/apl-devops-service";
+    public static final String MODULE_NAME = "devops";
 
     public List<String> TABLE_INCLUDE = new ArrayList<>();
 
@@ -92,7 +92,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        //strategy.setInclude("sys_user_role","sys_role","sys_role_resource","sys_resource","sys_share_resource");
+        strategy.setInclude("sys_inner_org", "sys_db_name", "sys_db_account", "sys_db_config");
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
