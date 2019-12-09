@@ -1,0 +1,91 @@
+package ${package.Controller};
+
+
+#if(${restControllerStyle})
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.apl.common.pojo.dto.PageDto;
+import org.springframework.web.bind.annotation.*;
+import java.io.Serializable;
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity}Po;
+import ${cfg.vo}.${entity}Vo;
+import ${cfg.dto}.${entity}Dto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.apl.common.utils.ResultUtils;
+
+import javax.validation.constraints.Min;
+
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@RestController
+@RequestMapping("/${table.name}")
+@Validated
+@Api(value = "$!{table.comment}",tags = "$!{table.comment}")
+@Slf4j
+public class ${table.controllerName} {
+
+    @Autowired
+    public ${table.serviceName} ${table.entityPath}Service;
+
+
+    @PostMapping(value = "/add")
+    @ApiOperation(value =  "添加 $!{table.comment}" , notes = "添加一个 $!{table.comment} ")
+    public ResultUtils<Boolean> add(@Validated ${entity}Po ${table.entityPath}) {
+
+        return ${table.entityPath}Service.add(${table.entityPath});
+    }
+
+
+
+    @PostMapping(value = "/del")
+    @ApiOperation(value =  "删除一个 $!{table.comment}" , notes = "根据id 删除一个 $!{table.comment}")
+    @ApiImplicitParam(name = "id",value = "${table.entityPath} 的 id",required = true)
+    public ResultUtils<Boolean> delById(@Min(value = 1 , message = "id不能小于 1") Serializable id) {
+
+        return ${table.entityPath}Service.deleteById(id);
+    }
+
+
+    @PostMapping(value = "/upd")
+    @ApiOperation(value =  "更新 $!{table.comment}" , notes = "根据id 更新 $!{table.comment}")
+    public ResultUtils<Boolean> updById(@Validated ${entity}Po ${table.entityPath}Po) {
+
+        return ${table.entityPath}Service.updById(${table.entityPath}Po);
+    }
+
+
+    @PostMapping(value = "/get")
+    @ApiOperation(value =  "查找 $!{table.comment}" , notes = "根据id 查找 $!{table.comment}")
+    @ApiImplicitParam(name = "id",value = "${table.entityPath} 的 id",required = true)
+    public ResultUtils<${entity}Po> getById(@Min(value = 1 , message = "id不能小于 1") Serializable id) {
+
+            return ${table.entityPath}Service.selectById(id);
+    }
+
+    @PostMapping("/get-list")
+    @ApiOperation(value =  "分页查找 $!{table.comment}" , notes = "分页查找 $!{table.comment}")
+    public ResultUtils<Page<${entity}Vo>> getList(PageDto pageDto, @Validated ${entity}Dto keyDto) {
+
+
+        return ${table.entityPath}Service.getList(pageDto , keyDto);
+    }
+
+
+}

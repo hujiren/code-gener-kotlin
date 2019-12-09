@@ -1,0 +1,75 @@
+package ${package.ServiceImpl};
+import com.apl.common.utils.ResultUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+
+import ${package.Entity}.${entity}Po;
+import ${cfg.vo}.${entity}Vo;
+import ${cfg.dto}.${entity}Dto;
+
+import java.io.Serializable;
+import java.util.List;
+import com.apl.common.pojo.dto.PageDto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+@Slf4j
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}Po>(), ${table.serviceName} {
+
+}
+#else
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Po> implements ${table.serviceName} {
+
+    @Override
+    public ResultUtils<Boolean> add(${entity}Po ${table.entityPath}){
+
+        return ResultUtils.SUCCESS(save(${table.entityPath}));
+    }
+
+    @Override
+    public ResultUtils<Boolean> deleteById(Serializable id){
+
+        return ResultUtils.SUCCESS(removeById(id));
+    }
+
+    @Override
+    public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}){
+
+        return ResultUtils.SUCCESS(updateById(${table.entityPath}));
+    }
+
+    @Override
+    public ResultUtils<${entity}Po> selectById(Serializable id){
+
+        return ResultUtils.SUCCESS(getById(id));
+    }
+
+
+    @Override
+    public ResultUtils<Page<${entity}Vo>> getList(PageDto pageDto , ${entity}Dto keyDto){
+
+        Page<${entity}Vo> page = new Page();
+        page.setCurrent(pageDto.getPageIndex());
+        page.setSize(pageDto.getPageSize());
+
+        List<${entity}Vo> list = baseMapper.getList(page , keyDto);
+        page.setRecords(list);
+        return ResultUtils.SUCCESS(page);
+    }
+
+}
+#end
