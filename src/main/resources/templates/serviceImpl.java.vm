@@ -34,7 +34,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Po> implements ${table.serviceName} {
 
     //状态code枚举
-    enum ${table.serviceName}Code {
+    /*enum ${table.serviceName}Code {
 
         ;
 
@@ -45,7 +45,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
              this.code = code;
              this.msg = msg;
         }
-    }
+    }*/
 
 
 
