@@ -56,6 +56,8 @@ public class ${table.controllerName} {
     @ApiOperation(value =  "更新" , notes = "更新")
     public ResultUtils<Boolean> updById(@Validated ${entity}Po ${table.entityPath}Po) {
 
+        ApiParamValidate.notEmpty("id", ${table.entityPath}.getId());
+
         return ${table.entityPath}Service.updById(${table.entityPath}Po);
     }
 
