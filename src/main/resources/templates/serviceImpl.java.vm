@@ -84,6 +84,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , flag);
     }
 
+
     @Override
     public ResultUtils<${entity}Po> selectById(Long id){
 

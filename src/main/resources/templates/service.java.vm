@@ -51,6 +51,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          */
         ResultUtils<${entity}Po> selectById(Long id);
 
+
         /**
          * @Desc: 分页查找 ${entity}Po 列表
          * @author ${author}
