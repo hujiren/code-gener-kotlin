@@ -1,4 +1,4 @@
-package ${package.Entity};
+package ${cfg.po};
 
 #foreach($pkg in ${table.importPackages})
 import ${pkg};

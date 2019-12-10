@@ -15,14 +15,15 @@ import java.util.*;
 public class CodeGenerator {
 
 
-    public static final String AUTHOR = "arran";
+    public static final String AUTHOR = "cy";
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
     public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/apl_devops?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
-    public static final String PACKAGE_NAME = "com.apl";
+    public static final String POJO_PACKAGE_NAME = "com.apl.devops.pojo";
+    public static final String IMPL_PACKAGE_NAME = "com.apl";
     public static final String CHILD_MODULE= "/apl-devops-service";
     public static final String MODULE_NAME = "devops";
 
@@ -92,7 +93,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        strategy.setInclude("sys_inner_org", "sys_db_name", "sys_db_account", "sys_db_config");
+        strategy.setInclude("commodity_unit");
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
@@ -117,7 +118,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent(PACKAGE_NAME);
+        pc.setParent(IMPL_PACKAGE_NAME);
         pc.setModuleName(MODULE_NAME);
         pc.setEntity("po");
         pc.setXml("mapper/mapper");
@@ -128,10 +129,9 @@ public class CodeGenerator {
             @Override
             public void initMap() {
                 Map<String , Object> map = new HashMap<>();
-                map.put("vo" , PACKAGE_NAME + "." +  MODULE_NAME + ".vo");
-                map.put("dto" , PACKAGE_NAME + "." +  MODULE_NAME + ".dto");
-                map.put("nowTime" , new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())));
-                map.put("author" , AUTHOR);
+                map.put("vo" , POJO_PACKAGE_NAME + ".vo");
+                map.put("dto" , POJO_PACKAGE_NAME + ".dto");
+                map.put("po" , POJO_PACKAGE_NAME + ".po");
                 setMap(map);
 
             }
@@ -143,21 +143,21 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/vo/"+ tableInfo.getEntityName() + "ListVo.java";
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "ListVo.java";
             }
         });
        focList.add(new FileOutConfig("/templates/entityDto.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/dto/"+ tableInfo.getEntityName() + "KeyDto.java";
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/") + "/dto/"+ tableInfo.getEntityName() + "KeyDto.java";
             }
         });
        focList.add(new FileOutConfig("/templates/entity.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + PACKAGE_NAME.replaceAll("\\." , "/") + "/" + MODULE_NAME + "/po/"+ tableInfo.getEntityName() + "Po.java";
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/") + "/po/"+ tableInfo.getEntityName() + "Po.java";
             }
         });
         cfg.setFileOutConfigList(focList);

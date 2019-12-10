@@ -2,12 +2,13 @@ package ${package.ServiceImpl};
 import com.apl.common.utils.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import com.apl.common.constants.CommonStatusCode;
 
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 
-import ${package.Entity}.${entity}Po;
+import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
 import ${cfg.dto}.${entity}KeyDto;
 
