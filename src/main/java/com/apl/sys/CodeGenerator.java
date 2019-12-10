@@ -19,11 +19,11 @@ public class CodeGenerator {
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/apl_devops?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
     public static final String PACKAGE_NAME = "com.apl";
-    public static final String CHILD_MODULE= "/apl-devops-service";
+    public static final String CHILD_MODULE= "/apl-wms-wh-inner-service-impl";
     public static final String MODULE_NAME = "devops";
 
     public List<String> TABLE_INCLUDE = new ArrayList<>();
