@@ -64,6 +64,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}){
 
+        ApiParamValidate.notEmpty("id", ${table.entityPath}.getId());
+
         Integer flag = baseMapper.updateById(${table.entityPath});
         if(flag.equals(1)){
             return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
