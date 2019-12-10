@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.apl.common.pojo.dto.PageDto;
 import org.springframework.web.bind.annotation.*;
 import ${package.Service}.${table.serviceName};
-import ${package.Entity}.${entity}Po;
+import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
 import ${cfg.dto}.${entity}KeyDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -64,8 +64,8 @@ public class ${table.controllerName} {
 
     @PostMapping(value = "/del")
     @ApiOperation(value =  "删除" , notes = "删除")
-    @ApiImplicitParam(name = "id",value = " id",required = true  , paramType = "long")
-    public ResultUtils<Boolean> delById(@Min(value = 1 , message = "id不能小于1") Long id) {
+    @ApiImplicitParam(name = "id",value = " id",required = true  , paramType = "query")
+    public ResultUtils<Boolean> delById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
         return ${table.entityPath}Service.delById(id);
     }
@@ -73,7 +73,7 @@ public class ${table.controllerName} {
 
     @PostMapping(value = "/get")
     @ApiOperation(value =  "获取详细" , notes = "获取详细")
-    @ApiImplicitParam(name = "id",value = "id",required = true  , paramType = "long")
+    @ApiImplicitParam(name = "id",value = "id",required = true  , paramType = "query")
     public ResultUtils<${entity}Po> getById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
         return ${table.entityPath}Service.selectById(id);
