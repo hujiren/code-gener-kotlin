@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apl.wms.wh.mapper.CommodityCategoryMapper">
+
+
+    <!-- 查找详情 2019-12-10-->
+    <select id="getById" resultType="com.apl.wms.wh.po.CommodityCategoryPo">
+        SELECT
+        id, 
+        category_name, 
+        category_name_en, 
+        parent_id, 
+        is_leaf, 
+        is_sys, 
+        cust_id, 
+        inner_org_id
+        FROM
+        commodity_category
+        where
+            id = #{id}
+    </select>
+
+    <!-- 查找列表 2019-12-10-->
+    <select id="getList" resultType="com.apl.wms.wh.vo.CommodityCategoryListVo">
+        SELECT
+        id, 
+        category_name, 
+        category_name_en, 
+        parent_id, 
+        is_leaf, 
+        is_sys, 
+        cust_id, 
+        inner_org_id
+        FROM
+        commodity_category
+        where
+        1 = 1
+    </select>
+
+</mapper>

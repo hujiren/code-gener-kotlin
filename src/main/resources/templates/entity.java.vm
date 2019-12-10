@@ -55,7 +55,9 @@ private static final long serialVersionUID=1L;
 #set($keyPropertyName=${field.propertyName})
 #end
 #if("$!field.comment" != "")
-#if(${swagger2})
+    #if(!${field.keyFlag})
+    #if(${field.name} != "inner_org_id")
+    #if(${swagger2})
     @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}" , required = true)
     #if("${field.columnType}" == "STRING")
     @NotEmpty(message = "${field.comment}不能为空")
@@ -69,11 +71,13 @@ private static final long serialVersionUID=1L;
     #if("${field.columnType}" == "LONG")
     @Min(value = 0 , message = "${field.comment}不能小于1")
     #end
-#else
+    #else
     /**
      * ${field.comment}
      */
-#end
+    #end
+    #end
+    #end
 #end
 #if(${field.keyFlag})
 ## 主键

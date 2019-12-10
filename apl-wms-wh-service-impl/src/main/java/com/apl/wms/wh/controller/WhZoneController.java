@@ -1,7 +1,6 @@
-package ${package.Controller};
+package com.apl.wms.wh.controller;
 
 
-#if(${restControllerStyle})
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -9,56 +8,50 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
-#else
-import org.springframework.stereotype.Controller;
-#end
-#if(${superControllerClassPackage})
-import ${superControllerClassPackage};
-#end
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.apl.common.pojo.dto.PageDto;
 import org.springframework.web.bind.annotation.*;
-import ${package.Service}.${table.serviceName};
-import ${cfg.po}.${entity}Po;
-import ${cfg.vo}.${entity}ListVo;
-import ${cfg.dto}.${entity}KeyDto;
+import com.apl.wms.wh.service.WhZoneService;
+import com.apl.wms.wh.po.WhZonePo;
+import com.apl.wms.wh.vo.WhZoneListVo;
+import com.apl.wms.wh.dto.WhZoneKeyDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.apl.common.utils.ResultUtils;
-import com.apl.common.validate.ApiParamValidate;
+
 import javax.validation.constraints.Min;
 
 /**
  *
- * @author ${author}
- * @since ${date}
+ * @author cy
+ * @since 2019-12-10
  */
 @RestController
-@RequestMapping("/${table.name}")
+@RequestMapping("/wh_zone")
 @Validated
-@Api(value = "$!{table.comment}",tags = "$!{table.comment}")
+@Api(value = "仓库分区",tags = "仓库分区")
 @Slf4j
-public class ${table.controllerName} {
+public class WhZoneController {
 
     @Autowired
-    public ${table.serviceName} ${table.entityPath}Service;
+    public WhZoneService whZoneService;
 
 
     @PostMapping(value = "/add")
     @ApiOperation(value =  "添加" , notes = "添加 ")
-    public ResultUtils<Integer> add(@Validated ${entity}Po ${table.entityPath}) {
+    public ResultUtils<Integer> add(@Validated WhZonePo whZone) {
 
-        return ${table.entityPath}Service.add(${table.entityPath});
+        return whZoneService.add(whZone);
     }
 
 
     @PostMapping(value = "/upd")
     @ApiOperation(value =  "更新" , notes = "更新")
-    public ResultUtils<Boolean> updById(@Validated ${entity}Po ${table.entityPath}Po) {
+    public ResultUtils<Boolean> updById(@Validated WhZonePo whZonePo) {
 
-        ApiParamValidate.notEmpty("id", ${table.entityPath}Po.getId());
+        ApiParamValidate.notEmpty("id", whZonePo.getId());
 
-        return ${table.entityPath}Service.updById(${table.entityPath}Po);
+        return whZoneService.updById(whZonePo);
     }
 
 
@@ -67,24 +60,24 @@ public class ${table.controllerName} {
     @ApiImplicitParam(name = "id",value = " id",required = true  , paramType = "query")
     public ResultUtils<Boolean> delById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
-        return ${table.entityPath}Service.delById(id);
+        return whZoneService.delById(id);
     }
 
 
     @PostMapping(value = "/get")
     @ApiOperation(value =  "获取详细" , notes = "获取详细")
     @ApiImplicitParam(name = "id",value = "id",required = true  , paramType = "query")
-    public ResultUtils<${entity}Po> getById(@Min(value = 1 , message = "id不能小于 1") Long id) {
+    public ResultUtils<WhZonePo> getById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
-        return ${table.entityPath}Service.selectById(id);
+        return whZoneService.selectById(id);
     }
 
 
     @PostMapping("/get-list")
     @ApiOperation(value =  "分页查找" , notes = "分页查找")
-    public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto, @Validated ${entity}KeyDto keyDto) {
+    public ResultUtils<Page<WhZoneListVo>> getList(PageDto pageDto, @Validated WhZoneKeyDto keyDto) {
 
-        return ${table.entityPath}Service.getList(pageDto , keyDto);
+        return whZoneService.getList(pageDto , keyDto);
     }
 
 }

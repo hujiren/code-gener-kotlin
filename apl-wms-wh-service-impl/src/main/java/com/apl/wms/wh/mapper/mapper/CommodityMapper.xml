@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apl.wms.wh.mapper.CommodityMapper">
+
+
+    <!-- 查找详情 2019-12-10-->
+    <select id="getById" resultType="com.apl.wms.wh.po.CommodityPo">
+        SELECT
+        id, 
+        sku, 
+        commodity_name, 
+        commodity_name_en, 
+        cust_id, 
+        category_id, 
+        brand_id, 
+        sale_status, 
+        review_stauts, 
+        unit_name, 
+        unit_name_en, 
+        platform_price, 
+        platform_currency, 
+        size_lenght, 
+        size_width, 
+        size_height, 
+        weight, 
+        net_url, 
+        declare_price, 
+        declare_currency, 
+        main_url, 
+        is_correspondence, 
+        texture_name, 
+        texture_name_en, 
+        color_name, 
+        color_name_en, 
+        sepc_name, 
+        spec_name_en, 
+        use_way, 
+        use_way_en, 
+        inner_org_id
+        FROM
+        commodity
+        where
+            id = #{id}
+    </select>
+
+    <!-- 查找列表 2019-12-10-->
+    <select id="getList" resultType="com.apl.wms.wh.vo.CommodityListVo">
+        SELECT
+        id, 
+        sku, 
+        commodity_name, 
+        commodity_name_en, 
+        cust_id, 
+        category_id, 
+        brand_id, 
+        sale_status, 
+        review_stauts, 
+        unit_name, 
+        unit_name_en, 
+        platform_price, 
+        platform_currency, 
+        size_lenght, 
+        size_width, 
+        size_height, 
+        weight, 
+        net_url, 
+        declare_price, 
+        declare_currency, 
+        main_url, 
+        is_correspondence, 
+        texture_name, 
+        texture_name_en, 
+        color_name, 
+        color_name_en, 
+        sepc_name, 
+        spec_name_en, 
+        use_way, 
+        use_way_en, 
+        inner_org_id
+        FROM
+        commodity
+        where
+        1 = 1
+    </select>
+
+</mapper>

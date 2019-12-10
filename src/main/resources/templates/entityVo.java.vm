@@ -40,8 +40,11 @@ private static final long serialVersionUID=1L;
 #set($keyPropertyName=${field.propertyName})
 #end
 
+    #if(${field.name} != "inner_org_id")
     // ${field.comment}
     private ${field.propertyType} ${field.propertyName};
+    #end
+
 #end
 ## ----------  END 字段循环遍历  ----------
 
