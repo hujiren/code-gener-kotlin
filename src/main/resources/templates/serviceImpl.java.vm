@@ -66,10 +66,10 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
         Integer flag = baseMapper.updateById(${table.entityPath});
         if(flag.equals(1)){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , flag);
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , flag);
+        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , false);
     }
 
 
@@ -78,10 +78,10 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
         boolean flag = removeById(id);
         if(flag){
-            return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , flag);
+            return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true);
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , flag);
+        return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , false);
     }
 
 
