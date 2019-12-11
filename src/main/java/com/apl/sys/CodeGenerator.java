@@ -19,15 +19,15 @@ public class CodeGenerator {
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_basic?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
     public static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
     public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     public static final String MODULE_NAME = "wh";
+    public static String TABLE_INCLUDE =  ""; //不能为空
 
-    public List<String> TABLE_INCLUDE = new ArrayList<>();
 
     public static final String SYSTEM_PATH = System.getProperty("user.dir");
     public static final String SYSTEM_CONTENTS = "D:/mp/";
@@ -45,6 +45,11 @@ public class CodeGenerator {
      * </p>
      */
     public static void main(String[] args) {
+        if(TABLE_INCLUDE==null || TABLE_INCLUDE.trim().equals("")){
+            System.out.println("表名不能为空");
+            return;
+        }
+
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
@@ -93,7 +98,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        // strategy.setInclude("commodity_category");
+        strategy.setInclude(TABLE_INCLUDE);
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
