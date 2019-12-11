@@ -2,6 +2,7 @@ package ${package.Mapper};
 
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
+import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 import ${superMapperClassPackage};
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +27,7 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Po> {
      * @Author: ${cfg.author}
      * @Date: ${cfg.nowTime}
      */
-    public ${entity}Po getById(@Param("id") Long id);
+    public ${entity}InfoVo getById(@Param("id") Long id);
 
     /**
      * @Desc: 查找列表

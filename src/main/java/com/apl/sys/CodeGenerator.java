@@ -19,7 +19,7 @@ public class CodeGenerator {
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_basic?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
     public static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
@@ -93,7 +93,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        //strategy.setInclude("currency_system");
+        strategy.setInclude("currency_system");
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
@@ -145,6 +145,13 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
 
                 return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "ListVo.java";
+            }
+        });
+        focList.add(new FileOutConfig("/templates/entityInfoVo.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "InfoVo.java";
             }
         });
        focList.add(new FileOutConfig("/templates/entityDto.java.vm") {
