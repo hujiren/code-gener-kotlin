@@ -26,7 +26,6 @@ public class CodeGenerator {
     public static final String CHILD_MODULE= "/apl-wms-wh-inner-service-impl";
     public static final String POJO_PACKAGE_NAME = "com.apl.devops.pojo";
     public static final String IMPL_PACKAGE_NAME = "com.apl";
-    public static final String CHILD_MODULE= "/apl-devops-service";
     public static final String MODULE_NAME = "devops";
 
     public List<String> TABLE_INCLUDE = new ArrayList<>();
