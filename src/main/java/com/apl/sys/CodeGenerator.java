@@ -93,7 +93,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        strategy.setInclude("sys_currency");
+        // strategy.setInclude("commodity_category");
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
