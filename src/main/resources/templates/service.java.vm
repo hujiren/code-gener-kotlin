@@ -10,7 +10,7 @@ import com.apl.common.pojo.dto.PageDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
  * <p>
- * $!{table.comment} 服务类
+ * $!{table.comment} service接口
  * </p>
  *
  * @author ${author}

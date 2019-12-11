@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * $!{table.comment}
+ * $!{table.comment} 持久化对象
  * </p>
  *
  * @author ${author}
@@ -35,7 +35,7 @@ import lombok.EqualsAndHashCode;
 #end
 @TableName("${table.name}")
 #if(${swagger2})
-@ApiModel(value="${entity}Po对象", description="$!{table.comment}")
+@ApiModel(value="$!{table.comment} 持久化对象", description="$!{table.comment}")
 #end
 #if(${superEntityClass})
 public class ${entity}Po extends ${superEntityClass}#if(${activeRecord})<${entity}Po>#end {
