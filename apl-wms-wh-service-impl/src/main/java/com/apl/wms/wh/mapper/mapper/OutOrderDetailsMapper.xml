@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apl.wms.wh.mapper.OutOrderDetailsMapper">
+
+
+    <!-- 查找详情 2019-12-11-->
+    <select id="getById" resultType="com.apl.wms.wh.vo.OutOrderDetailsInfoVo">
+        SELECT
+        id, 
+        order_id, 
+        to_desc_logistics, 
+        to_desc_carrier, 
+        dest_contact, 
+        dest_tel, 
+        dest_phone, 
+        dest_email, 
+        dest_contry_code, 
+        dest_zip_code, 
+        dest_city, 
+        dest_company_name, 
+        dest_street, 
+        dest_address1, 
+        dest_address2, 
+        dest_address3, 
+        inner_org_id
+        FROM
+        out_order_details
+        where
+            id = #{id}
+    </select>
+
+    <!-- 查找列表 2019-12-11-->
+    <select id="getList" resultType="com.apl.wms.wh.vo.OutOrderDetailsListVo">
+        SELECT
+        id, 
+        order_id, 
+        to_desc_logistics, 
+        to_desc_carrier, 
+        dest_contact, 
+        dest_tel, 
+        dest_phone, 
+        dest_email, 
+        dest_contry_code, 
+        dest_zip_code, 
+        dest_city, 
+        dest_company_name, 
+        dest_street, 
+        dest_address1, 
+        dest_address2, 
+        dest_address3, 
+        inner_org_id
+        FROM
+        out_order_details
+        where
+        1 = 1
+    </select>
+
+</mapper>

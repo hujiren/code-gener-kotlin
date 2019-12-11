@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Min;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.sql.Timestamp;
 #if(${entityLombokModel})
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -108,7 +109,7 @@ private static final long serialVersionUID=1L;
     @TableLogic
 #end
     #if(${field.name} != "inner_org_id")
-    private ${field.propertyType} ${field.propertyName};
+    private #if(${field.propertyType} == "LocalDateTime")Timestamp#else${field.propertyType}#end ${field.propertyName};
     #end
 #end
 ## ----------  END 字段循环遍历  ----------
