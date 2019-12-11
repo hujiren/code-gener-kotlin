@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.RecursiveTask;
 
 public class CodeGenerator {
 
@@ -26,7 +27,7 @@ public class CodeGenerator {
     public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     public static final String MODULE_NAME = "wh";
-    public static String TABLE_INCLUDE =  ""; //不能为空
+    public static String TABLE_INCLUDE = ""; //不能为空
 
 
     public static final String SYSTEM_PATH = System.getProperty("user.dir");
@@ -49,6 +50,7 @@ public class CodeGenerator {
             System.out.println("表名不能为空");
             return;
         }
+
 
         AutoGenerator mpg = new AutoGenerator();
 
@@ -98,7 +100,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        strategy.setInclude(TABLE_INCLUDE);
+        strategy.setInclude(TABLE_INCLUDE.split(","));
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
