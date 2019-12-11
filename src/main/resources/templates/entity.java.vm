@@ -107,7 +107,9 @@ private static final long serialVersionUID=1L;
 #if(${logicDeleteFieldName}==${field.name})
     @TableLogic
 #end
+    #if(${field.name} != "inner_org_id")
     private ${field.propertyType} ${field.propertyName};
+    #end
 #end
 ## ----------  END 字段循环遍历  ----------
 

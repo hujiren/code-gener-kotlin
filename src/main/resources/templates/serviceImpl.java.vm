@@ -76,7 +76,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<Boolean> delById(Long id){
+    public ResultUtils<Boolean> delById(Integer id){
 
         boolean flag = removeById(id);
         if(flag){
@@ -88,11 +88,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<${entity}InfoVo> selectById(Long id){
+    public ResultUtils<${entity}InfoVo> selectById(Integer id){
 
         ${entity}InfoVo ${table.entityPath}InfoVo = baseMapper.getById(id);
 
-        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, ${table.entityPath});
+        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, ${table.entityPath}InfoVo);
     }
 
 

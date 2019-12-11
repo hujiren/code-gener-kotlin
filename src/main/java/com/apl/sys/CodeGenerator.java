@@ -19,7 +19,7 @@ public class CodeGenerator {
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_basic?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
     public static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
@@ -93,9 +93,9 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        strategy.setInclude("currency_system");
+        // strategy.setInclude("commodity_category");
 
-        //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
+        //strategy.setExclude("commodity_category"); // 排除生成的表
 
         // 自定义实体父类
         //strategy.setSuperEntityClass("com.prb.entity.BaseModel");
