@@ -3,6 +3,7 @@ import com.apl.common.utils.ResultUtils;
 
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
+import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 import ${superServiceClassPackage};
 import com.apl.common.pojo.dto.PageDto;
@@ -49,7 +50,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}Po> selectById(Long id);
+        ResultUtils<${entity}InfoVo> selectById(Long id);
 
 
         /**

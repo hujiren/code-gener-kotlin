@@ -38,7 +38,7 @@
     #end
 
     <!-- 查找详情 ${cfg.nowTime}-->
-    <select id="getById" resultType="${cfg.po}.${entity}Po">
+    <select id="getById" resultType="${cfg.vo}.${entity}InfoVo">
         SELECT
 #foreach($field in ${table.commonFields})
         #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,

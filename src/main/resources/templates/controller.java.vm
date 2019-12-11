@@ -22,10 +22,11 @@ import org.springframework.web.bind.annotation.*;
 import ${package.Service}.${table.serviceName};
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
+import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.apl.common.utils.ResultUtils;
-
+import com.apl.common.validate.ApiParamValidate;
 import javax.validation.constraints.Min;
 
 /**
@@ -56,7 +57,7 @@ public class ${table.controllerName} {
     @ApiOperation(value =  "更新" , notes = "更新")
     public ResultUtils<Boolean> updById(@Validated ${entity}Po ${table.entityPath}Po) {
 
-        ApiParamValidate.notEmpty("id", ${table.entityPath}.getId());
+        ApiParamValidate.notEmpty("id", ${table.entityPath}Po.getId());
 
         return ${table.entityPath}Service.updById(${table.entityPath}Po);
     }
@@ -74,7 +75,7 @@ public class ${table.controllerName} {
     @PostMapping(value = "/get")
     @ApiOperation(value =  "获取详细" , notes = "获取详细")
     @ApiImplicitParam(name = "id",value = "id",required = true  , paramType = "query")
-    public ResultUtils<${entity}Po> getById(@Min(value = 1 , message = "id不能小于 1") Long id) {
+    public ResultUtils<${entity}InfoVo> getById(@Min(value = 1 , message = "id不能小于 1") Long id) {
 
         return ${table.entityPath}Service.selectById(id);
     }

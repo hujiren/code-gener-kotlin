@@ -10,6 +10,7 @@ import ${superServiceImplClassPackage};
 
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
+import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 
 import java.util.List;
@@ -87,9 +88,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<${entity}Po> selectById(Long id){
+    public ResultUtils<${entity}InfoVo> selectById(Long id){
 
-        ${entity}Po ${table.entityPath} = getById(id);
+        ${entity}InfoVo ${table.entityPath}InfoVo = baseMapper.getById(id);
 
         return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, ${table.entityPath});
     }

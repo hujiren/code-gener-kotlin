@@ -27,7 +27,7 @@ import java.io.Serializable;
 #end
 ## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
-public class ${entity}ListVo implements Serializable {
+public class ${entity}InfoVo implements Serializable {
 
 
 #if(${entitySerialVersionUID})
@@ -61,7 +61,7 @@ private static final long serialVersionUID=1L;
     }
 
 #if(${entityBuilderModel})
-    public ${entity}ListVo set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public ${entity}InfoVo set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
 #else
     public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
 #end
@@ -82,7 +82,7 @@ private static final long serialVersionUID=1L;
 #if(!${entityLombokModel})
     @Override
     public String toString() {
-        return "${entity}ListVo{" +
+        return "${entity}InfoVo{" +
 #foreach($field in ${table.fields})
 #if($!{foreach.index}==0)
         "${field.propertyName}=" + ${field.propertyName} +
