@@ -64,13 +64,16 @@ private static final long serialVersionUID=1L;
     @NotEmpty(message = "${field.comment}不能为空")
     #end
     #if("${field.columnType}" == "INTEGER")
-    @Min(value = 0 , message = "${field.comment}不能小于0")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 1 , message = "${field.comment}不合法")
     #end
     #if("${field.columnType}" == "BIG_DECIMAL")
-    @Min(value = 0 , message = "${field.comment}不能小于0")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不合法")
     #end
     #if("${field.columnType}" == "LONG")
-    @Min(value = 0 , message = "${field.comment}不能小于1")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不不合法")
     #end
     #else
     /**
