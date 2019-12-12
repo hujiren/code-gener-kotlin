@@ -46,9 +46,6 @@ public class ${entity}Po extends Model<${entity}Po> {
 public class ${entity}Po implements Serializable {
 #end
 
-#if(${entitySerialVersionUID})
-    private static final long serialVersionUID=1L;
-#end
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
@@ -116,6 +113,10 @@ public class ${entity}Po implements Serializable {
     #end
 #end
 ## ----------  END 字段循环遍历  ----------
+
+#if(${entitySerialVersionUID})
+    private static final long serialVersionUID=1L;
+#end
 
 #if(!${entityLombokModel})
 #foreach($field in ${table.fields})
