@@ -65,7 +65,7 @@ private static final long serialVersionUID=1L;
     #end
     #if("${field.columnType}" == "INTEGER")
     @NotNull(message = "${field.comment}不能为空")
-    @Min(value = 1 , message = "${field.comment}不合法")
+    @Min(value = 0 , message = "${field.comment}不合法")
     #end
     #if("${field.columnType}" == "BIG_DECIMAL")
     @NotNull(message = "${field.comment}不能为空")
