@@ -26,7 +26,7 @@ public class CodeGenerator {
     public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     public static final String MODULE_NAME = "wh";
-    public static String TABLE_INCLUDE =  "commodity,commodity_brand"; //不能为空
+    public static String TABLE_INCLUDE =  ""; //不能为空
 
 
     public static final String SYSTEM_PATH = System.getProperty("user.dir");
