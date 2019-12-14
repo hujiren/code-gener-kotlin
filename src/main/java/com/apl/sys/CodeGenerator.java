@@ -27,7 +27,7 @@ public class CodeGenerator {
     static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     static final String MODULE_NAME = "wh";
     static String TABLE_INCLUDE =  ""; //表名(下划线)，不能为空;  例如：commodity_brand
-    static String EXISTS_FIELDS = ""; //不能重复的字段名(小驼峰)，可为空;  例如： code, name, nameEn
+    static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
 
 
     static final String SYSTEM_PATH = System.getProperty("user.dir");
@@ -138,7 +138,7 @@ public class CodeGenerator {
                 map.put("po" , POJO_PACKAGE_NAME + ".po");
                 map.put("nowTime" , new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())));
                 if(EXISTS_FIELDS!=null && EXISTS_FIELDS.length()>0) {
-                    Map<String , Object> map2 = createExistsTempData(EXISTS_FIELDS);
+                    LinkedHashMap<String , Map> map2 = createExistsTempData(EXISTS_FIELDS);
                     map.put("exists_fields", map2);
                 }
                 setMap(map);
@@ -193,15 +193,15 @@ public class CodeGenerator {
 
     }
 
-    static Map<String, Object> createExistsTempData(String EXISTS_FIELDS){
+    static LinkedHashMap<String, Map> createExistsTempData(String EXISTS_FIELDS){
 
-        Map<String, Object> maps = new HashMap<>();
+        LinkedHashMap<String, Map> maps = new LinkedHashMap<>();
 
         String[] arr = EXISTS_FIELDS.split(",");
         for (String fieldName : arr) {
             Map<String, String> fieldMap = new HashMap<>();
-            fieldMap.put("name", fieldName.trim());
-            fieldMap.put("underscoreName", humpToLine(fieldName.trim())); //下划线字段名
+            fieldMap.put("name", lineToHump(fieldName.trim())); //驼峰字段名
+            fieldMap.put("underscoreName", fieldName.trim()); //下划线字段名
             fieldMap.put("upperCaseName", fieldName.toUpperCase().trim()); //大写字母字段名
 
             maps.put(fieldName, fieldMap);
@@ -210,6 +210,21 @@ public class CodeGenerator {
         return maps;
 
     }
+
+
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
+    /** 下划线转驼峰 */
+    public static String lineToHump(String str) {
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
 
     private static Pattern humpPattern = Pattern.compile("[A-Z]");
     /** 驼峰转下划线,效率比上面高 */
