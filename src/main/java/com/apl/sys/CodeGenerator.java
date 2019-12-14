@@ -11,32 +11,30 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CodeGenerator {
 
 
-    public static final String AUTHOR = "arran";
-    public static final String DB_USER = "root";
-    public static final String DB_PWD = "123456";
+    static final String AUTHOR = "apl";
+    static final String DB_USER = "root";
+    static final String DB_PWD = "123456";
+    static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
+    static final String IMPL_PACKAGE_NAME = "com.apl.wms";
+    static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
+    static final String MODULE_NAME = "wh";
+    static String TABLE_INCLUDE =  ""; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
 
 
-    public static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
-    public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
-    public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
-    public static final String MODULE_NAME = "wh";
-
-    public List<String> TABLE_INCLUDE = new ArrayList<>();
-
-    public static final String SYSTEM_PATH = System.getProperty("user.dir");
-    public static final String SYSTEM_CONTENTS = "D:/mp/";
-
-    public static final String XML_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/resources/mapper/";
-    public static final String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/java";
-
-    public static final String XML_OUT_PUT = XML_OUT_PUT_TO_PROJECT;
-    public static final String JAVA_OUT_PUT = JAVA_OUT_PUT_TO_PROJECT;
+    static final String SYSTEM_PATH = System.getProperty("user.dir");
+    static final String XML_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/resources/mapper/";
+    static final String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/java";
+    static final String XML_OUT_PUT = XML_OUT_PUT_TO_PROJECT;
+    static final String JAVA_OUT_PUT = JAVA_OUT_PUT_TO_PROJECT;
 
 
     /**
@@ -45,6 +43,12 @@ public class CodeGenerator {
      * </p>
      */
     public static void main(String[] args) {
+        if(TABLE_INCLUDE==null || TABLE_INCLUDE.trim().equals("")){
+            System.out.println("表名不能为空");
+            return;
+        }
+
+
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
@@ -93,7 +97,7 @@ public class CodeGenerator {
         /**
          * 分库分表  需要生成的表
          */
-        //strategy.setInclude("currency_system");
+        strategy.setInclude(TABLE_INCLUDE.split(","));
 
         //strategy.setExclude(TABLE_EXCLUDE); // 排除生成的表
 
@@ -133,8 +137,11 @@ public class CodeGenerator {
                 map.put("dto" , POJO_PACKAGE_NAME + ".dto");
                 map.put("po" , POJO_PACKAGE_NAME + ".po");
                 map.put("nowTime" , new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())));
+                if(EXISTS_FIELDS!=null && EXISTS_FIELDS.length()>0) {
+                    LinkedHashMap<String , Map> map2 = createExistsTempData(EXISTS_FIELDS);
+                    map.put("exists_fields", map2);
+                }
                 setMap(map);
-
             }
         };
 
@@ -145,6 +152,13 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
 
                 return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "ListVo.java";
+            }
+        });
+        focList.add(new FileOutConfig("/templates/entityInfoVo.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/"+CHILD_MODULE  +  "/src/main/java/" + POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "InfoVo.java";
             }
         });
        focList.add(new FileOutConfig("/templates/entityDto.java.vm") {
@@ -178,5 +192,52 @@ public class CodeGenerator {
         mpg.execute();
 
     }
+
+    static LinkedHashMap<String, Map> createExistsTempData(String EXISTS_FIELDS){
+
+        LinkedHashMap<String, Map> maps = new LinkedHashMap<>();
+
+        String[] arr = EXISTS_FIELDS.split(",");
+        for (String fieldName : arr) {
+            Map<String, String> fieldMap = new HashMap<>();
+            fieldMap.put("name", lineToHump(fieldName.trim())); //驼峰字段名
+            fieldMap.put("underscoreName", fieldName.trim()); //下划线字段名
+            fieldMap.put("upperCaseName", fieldName.toUpperCase().trim()); //大写字母字段名
+
+            maps.put(fieldName, fieldMap);
+        }
+
+        return maps;
+
+    }
+
+
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
+    /** 下划线转驼峰 */
+    public static String lineToHump(String str) {
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+
+    private static Pattern humpPattern = Pattern.compile("[A-Z]");
+    /** 驼峰转下划线,效率比上面高 */
+    static String humpToLine(String str) {
+        Matcher matcher = humpPattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+
 
 }

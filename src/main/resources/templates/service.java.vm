@@ -3,13 +3,14 @@ import com.apl.common.utils.ResultUtils;
 
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
+import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 import ${superServiceClassPackage};
 import com.apl.common.pojo.dto.PageDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
  * <p>
- * $!{table.comment} 服务类
+ * $!{table.comment} service接口
  * </p>
  *
  * @author ${author}
@@ -41,7 +42,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> delById(Long id);
+        ResultUtils<Boolean> delById(Integer id);
 
 
         /**
@@ -49,7 +50,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}Po> selectById(Long id);
+        ResultUtils<${entity}InfoVo> selectById(Integer id);
 
 
         /**

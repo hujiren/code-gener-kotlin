@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Min;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.sql.Timestamp;
 #if(${entityLombokModel})
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +19,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * $!{table.comment}
+ * $!{table.comment} 持久化对象
  * </p>
  *
  * @author ${author}
@@ -35,7 +36,7 @@ import lombok.EqualsAndHashCode;
 #end
 @TableName("${table.name}")
 #if(${swagger2})
-@ApiModel(value="${entity}Po对象", description="$!{table.comment}")
+@ApiModel(value="$!{table.comment} 持久化对象", description="$!{table.comment} 持久化对象")
 #end
 #if(${superEntityClass})
 public class ${entity}Po extends ${superEntityClass}#if(${activeRecord})<${entity}Po>#end {
@@ -45,9 +46,6 @@ public class ${entity}Po extends Model<${entity}Po> {
 public class ${entity}Po implements Serializable {
 #end
 
-#if(${entitySerialVersionUID})
-private static final long serialVersionUID=1L;
-#end
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
@@ -63,13 +61,16 @@ private static final long serialVersionUID=1L;
     @NotEmpty(message = "${field.comment}不能为空")
     #end
     #if("${field.columnType}" == "INTEGER")
-    @Min(value = 0 , message = "${field.comment}不能小于0")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不合法")
     #end
     #if("${field.columnType}" == "BIG_DECIMAL")
-    @Min(value = 0 , message = "${field.comment}不能小于0")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不合法")
     #end
     #if("${field.columnType}" == "LONG")
-    @Min(value = 0 , message = "${field.comment}不能小于1")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不不合法")
     #end
     #else
     /**
@@ -107,9 +108,15 @@ private static final long serialVersionUID=1L;
 #if(${logicDeleteFieldName}==${field.name})
     @TableLogic
 #end
-    private ${field.propertyType} ${field.propertyName};
+    #if(${field.name} != "inner_org_id")
+    private #if(${field.propertyType} == "LocalDateTime")Timestamp#else${field.propertyType}#end ${field.propertyName};
+    #end
 #end
 ## ----------  END 字段循环遍历  ----------
+
+#if(${entitySerialVersionUID})
+    private static final long serialVersionUID=1L;
+#end
 
 #if(!${entityLombokModel})
 #foreach($field in ${table.fields})
