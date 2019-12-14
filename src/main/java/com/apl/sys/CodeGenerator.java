@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class CodeGenerator {
 
 
-    static final String AUTHOR = "cy";
+    static final String AUTHOR = "apl";
     static final String DB_USER = "root";
     static final String DB_PWD = "123456";
 
