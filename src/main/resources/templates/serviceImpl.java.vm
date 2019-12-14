@@ -96,7 +96,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<${entity}InfoVo> selectById(Integer id){
+    public ResultUtils<${entity}InfoVo> getById(Integer id){
 
         ${entity}InfoVo ${table.entityPath}InfoVo = baseMapper.getById(id);
 

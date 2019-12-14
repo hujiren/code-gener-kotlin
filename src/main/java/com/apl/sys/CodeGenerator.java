@@ -26,7 +26,7 @@ public class CodeGenerator {
     static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     static final String MODULE_NAME = "wh";
-    static String TABLE_INCLUDE =  ""; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String TABLE_INCLUDE =  "commodity_brand"; //表名(下划线)，不能为空;  例如：commodity_brand
     static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
 
 
@@ -48,9 +48,7 @@ public class CodeGenerator {
             return;
         }
 
-
         AutoGenerator mpg = new AutoGenerator();
-
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 
@@ -64,7 +62,6 @@ public class CodeGenerator {
         //gc.setBaseColumnList(true);// XML columList
         gc.setIdType(IdType.UUID);
         gc.setAuthor(AUTHOR);
-
 
         //动卡空间app
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
