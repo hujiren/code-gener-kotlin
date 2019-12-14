@@ -28,8 +28,8 @@ public class CodeGenerator {
     public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     public static final String MODULE_NAME = "wh";
-    public static String TABLE_INCLUDE =  "commodity_brand"; //不能为空
-    public static String EXISTS_FIELDS = "memberName, memberEmail, memberPhone";
+    public static String TABLE_INCLUDE =  ""; //表名，不能为空  commodity_brand
+    public static String EXISTS_FIELDS = ""; //不能重复的字段，可为空  code, name, nameEn
 
 
     public static final String SYSTEM_PATH = System.getProperty("user.dir");
