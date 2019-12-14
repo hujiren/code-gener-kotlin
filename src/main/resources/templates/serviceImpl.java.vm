@@ -119,14 +119,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     #if(${cfg.exists_fields})
-    void exists(Long id,
-        #foreach($field in ${cfg.exists_fields})
-                #if($foreach.count == 1)        #end
-                String ${field.name}#if($foreach.hasNext), #end
-                #if(!$foreach.hasNext)
-                #end
-        #end
-        ) {
+    void exists(Long id, #foreach($field in ${cfg.exists_fields}) String ${field.name}#if($foreach.hasNext), #end #end) {
 
         List<${entity}InfoVo> list = baseMapper.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
         if (!CollectionUtils.isEmpty(list)) {
