@@ -36,5 +36,22 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Po> {
      */
     List<${entity}ListVo> getList(Page page, @Param("kd") ${entity}KeyDto keyDto);
 
+
+    #if(${cfg.exists_fields})
+    /**
+     * @Desc: 检测记录是否重复
+     * @Author: ${cfg.author}
+     * @Date: ${cfg.nowTime}
+     */
+    List<${entity}InfoVo> exists(@Param("id") Long id,
+        #foreach($field in ${cfg.exists_fields})
+            #if($foreach.count == 1)        #end
+            @Param("${field.name}") String ${field.name}#if($foreach.hasNext), #end
+            #if(!$foreach.hasNext)
+            #end
+        #end
+        );
+    #end
+
 }
 #end

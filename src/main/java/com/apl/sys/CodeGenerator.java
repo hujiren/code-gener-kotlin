@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CodeGenerator {
 
@@ -26,7 +28,8 @@ public class CodeGenerator {
     public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     public static final String MODULE_NAME = "wh";
-    public static String TABLE_INCLUDE =  ""; //不能为空
+    public static String TABLE_INCLUDE =  "commodity_brand"; //不能为空
+    public static String EXISTS_FIELDS = "memberName, memberEmail, memberPhone";
 
 
     public static final String SYSTEM_PATH = System.getProperty("user.dir");
@@ -139,8 +142,11 @@ public class CodeGenerator {
                 map.put("dto" , POJO_PACKAGE_NAME + ".dto");
                 map.put("po" , POJO_PACKAGE_NAME + ".po");
                 map.put("nowTime" , new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())));
+                if(EXISTS_FIELDS!=null) {
+                    Map<String , Object> map2 = createExistsTempData(EXISTS_FIELDS);
+                    map.put("exists_fields", map2);
+                }
                 setMap(map);
-
             }
         };
 
@@ -191,5 +197,37 @@ public class CodeGenerator {
         mpg.execute();
 
     }
+
+    static Map<String, Object> createExistsTempData(String EXISTS_FIELDS){
+
+        Map<String, Object> maps = new HashMap<>();
+
+        String[] arr = EXISTS_FIELDS.split(",");
+        for (String fieldName : arr) {
+            Map<String, String> fieldMap = new HashMap<>();
+            fieldMap.put("name", fieldName.trim());
+            fieldMap.put("underscoreName", humpToLine(fieldName.trim())); //下划线字段名
+            fieldMap.put("upperCaseName", fieldName.toUpperCase().trim()); //大写字母字段名
+
+            maps.put(fieldName, fieldMap);
+        }
+
+        return maps;
+
+    }
+
+    private static Pattern humpPattern = Pattern.compile("[A-Z]");
+    /** 驼峰转下划线,效率比上面高 */
+    public static String humpToLine(String str) {
+        Matcher matcher = humpPattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+
 
 }
