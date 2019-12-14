@@ -17,28 +17,28 @@ import java.util.regex.Pattern;
 public class CodeGenerator {
 
 
-    public static final String AUTHOR = "cy";
-    public static final String DB_USER = "root";
-    public static final String DB_PWD = "123456";
+    static final String AUTHOR = "cy";
+    static final String DB_USER = "root";
+    static final String DB_PWD = "123456";
 
-    public static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
-
-
-    public static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
-    public static final String IMPL_PACKAGE_NAME = "com.apl.wms";
-    public static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
-    public static final String MODULE_NAME = "wh";
-    public static String TABLE_INCLUDE =  ""; //表名，不能为空;  例如：commodity_brand
-    public static String EXISTS_FIELDS = ""; //不能重复的字段名(小驼峰)，可为空;  例如：code, name, nameEn
+    static final String DB_URL = "jdbc:mysql://192.168.31.185:3307/pgs_wms_wh?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
 
-    public static final String SYSTEM_PATH = System.getProperty("user.dir");
+    static final String POJO_PACKAGE_NAME = "com.apl.wms.wh";
+    static final String IMPL_PACKAGE_NAME = "com.apl.wms";
+    static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
+    static final String MODULE_NAME = "wh";
+    static String TABLE_INCLUDE =  ""; //表名，不能为空;  例如：commodity_brand
+    static String EXISTS_FIELDS = ""; //不能重复的字段名(小驼峰)，可为空;  例如：code, name, nameEn
 
-    public static final String XML_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/resources/mapper/";
-    public static final String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/java";
 
-    public static final String XML_OUT_PUT = XML_OUT_PUT_TO_PROJECT;
-    public static final String JAVA_OUT_PUT = JAVA_OUT_PUT_TO_PROJECT;
+    static final String SYSTEM_PATH = System.getProperty("user.dir");
+
+    static final String XML_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/resources/mapper/";
+    static final String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/java";
+
+    static final String XML_OUT_PUT = XML_OUT_PUT_TO_PROJECT;
+    static final String JAVA_OUT_PUT = JAVA_OUT_PUT_TO_PROJECT;
 
 
     /**
@@ -217,7 +217,7 @@ public class CodeGenerator {
 
     private static Pattern humpPattern = Pattern.compile("[A-Z]");
     /** 驼峰转下划线,效率比上面高 */
-    public static String humpToLine(String str) {
+    static String humpToLine(String str) {
         Matcher matcher = humpPattern.matcher(str);
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
