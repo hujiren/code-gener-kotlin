@@ -33,7 +33,6 @@ public class CodeGenerator {
 
 
     public static final String SYSTEM_PATH = System.getProperty("user.dir");
-    public static final String SYSTEM_CONTENTS = "D:/mp/";
 
     public static final String XML_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/resources/mapper/";
     public static final String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/java";
