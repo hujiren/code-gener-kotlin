@@ -15,7 +15,7 @@ import java.util.*;
 public class CodeGenerator {
 
 
-    public static final String AUTHOR = "cy";
+    public static final String AUTHOR = "arran";
     public static final String DB_USER = "root";
     public static final String DB_PWD = "123456";
 
