@@ -142,7 +142,7 @@ public class CodeGenerator {
                 map.put("dto" , POJO_PACKAGE_NAME + ".dto");
                 map.put("po" , POJO_PACKAGE_NAME + ".po");
                 map.put("nowTime" , new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())));
-                if(EXISTS_FIELDS!=null) {
+                if(EXISTS_FIELDS!=null && EXISTS_FIELDS.length()>0) {
                     Map<String , Object> map2 = createExistsTempData(EXISTS_FIELDS);
                     map.put("exists_fields", map2);
                 }
