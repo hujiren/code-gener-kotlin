@@ -26,8 +26,8 @@ public class CodeGenerator {
     static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     static final String MODULE_NAME = "wh";
-    static String TABLE_INCLUDE =  "commodity_brand"; //表名(下划线)，不能为空;  例如：commodity_brand
-    static String EXISTS_FIELDS = "brand_name, brand_name_en"; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
+    static String TABLE_INCLUDE =  ""; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
 
 
     static final String SYSTEM_PATH = System.getProperty("user.dir");

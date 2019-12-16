@@ -126,7 +126,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
            for(${entity}InfoVo  ${table.entityPath}InfoVo : list) {
 
               #foreach($field in ${cfg.exists_fields})
-              if(${table.entityPath}InfoVo${field.name}.${field.getMethodName}.equals(${field.name}))
+              if(${table.entityPath}InfoVo.${field.getMethodName}.equals(${field.name}))
                  throw new AplException("${field.upperCaseName}_EXIST", "${field.name}已经存在");
               #end
            }
