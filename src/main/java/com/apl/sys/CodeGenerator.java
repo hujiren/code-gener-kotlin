@@ -196,8 +196,11 @@ public class CodeGenerator {
 
         String[] arr = EXISTS_FIELDS.split(",");
         for (String fieldName : arr) {
+            String fieldName2 = lineToHump(fieldName.trim());
+            String getMethodName = "get"+fieldName2.substring(0,1).toUpperCase()+fieldName2.substring(1)+"()";
             Map<String, String> fieldMap = new HashMap<>();
-            fieldMap.put("name", lineToHump(fieldName.trim())); //驼峰字段名
+            fieldMap.put("name", fieldName2); //驼峰字段名
+            fieldMap.put("getMethodName", getMethodName); //get方法
             fieldMap.put("underscoreName", fieldName.trim()); //下划线字段名
             fieldMap.put("upperCaseName", fieldName.toUpperCase().trim()); //大写字母字段名
 

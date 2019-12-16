@@ -55,7 +55,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public ResultUtils<Integer> add(${entity}Po ${table.entityPath}){
 
         #if(${cfg.exists_fields})
-        this.exists(0L, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        this.exists(0L, #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end);
         #end
 
         Integer flag = baseMapper.insert(${table.entityPath});
@@ -71,7 +71,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}){
 
         #if(${cfg.exists_fields})
-        this.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        this.exists(${table.entityPath}.getId(), #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end);
         #end
 
         Integer flag = baseMapper.updateById(${table.entityPath});
@@ -126,7 +126,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
            for(${entity}InfoVo  ${table.entityPath}InfoVo : list) {
 
               #foreach($field in ${cfg.exists_fields})
-              if(${table.entityPath}InfoVo.equals(${field.name}))
+              if(${table.entityPath}InfoVo.${field.getMethodName}.equals(${field.name}))
                  throw new AplException("${field.upperCaseName}_EXIST", "${field.name}已经存在");
               #end
            }
