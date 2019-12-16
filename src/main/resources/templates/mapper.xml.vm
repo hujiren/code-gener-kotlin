@@ -5,7 +5,6 @@
     #if(${enableCache})
         <!-- 开启二级缓存 -->
         <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-
     #end
     #if(${baseResultMap})
         <!-- 通用查询映射结果 -->
@@ -24,37 +23,33 @@
                 #end
             #end
         </resultMap>
-
     #end
+
     #if(${baseColumnList})
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-#foreach($field in ${table.commonFields})
+        #foreach($field in ${table.commonFields})
             ${field.name},
-#end
+        #end
         ${table.fieldNames}
     </sql>
-
     #end
 
     <!-- 查找详情 ${cfg.nowTime}-->
     <select id="getById" resultType="${cfg.vo}.${entity}InfoVo">
         SELECT
-#foreach($field in ${table.commonFields})
-        #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,
-#end
-#foreach($field in ${table.fields})
-        #if($foreach.count == 1)        #end
-        ${field.name}#if($foreach.hasNext), #end
-        #if(!$foreach.hasNext)
+        #foreach($field in ${table.commonFields})
+          #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,
         #end
-    #end
+        #foreach($field in ${table.fields})
+          ${field.name}#if($foreach.hasNext), #end
+        #end
         FROM
-        ${table.name}
+          ${table.name}
         where
-#foreach($field in ${table.fields})
+        #foreach($field in ${table.fields})
         #if(${field.keyFlag})##生成主键排在第一位
-            ${field.name} = #{id}
+          ${field.name} = #{id}
         #end
     #end
     </select>
@@ -62,19 +57,35 @@
     <!-- 查找列表 ${cfg.nowTime}-->
     <select id="getList" resultType="${cfg.vo}.${entity}ListVo">
         SELECT
-#foreach($field in ${table.commonFields})
-        #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,
-#end
-#foreach($field in ${table.fields})
-        #if($foreach.count == 1)        #end
-        ${field.name}#if($foreach.hasNext), #end
-        #if(!$foreach.hasNext)
+        #foreach($field in ${table.commonFields})
+           #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,
         #end
-    #end
+        #foreach($field in ${table.fields})
+           ${field.name}#if($foreach.hasNext), #end
+        #end
         FROM
-        ${table.name}
+           ${table.name}
         where
         1 = 1
+        order by id desc
     </select>
+
+    #if(${cfg.exists_fields})
+    <!-- 检查记录是否重复 -->
+    <select id="exists" resultType="${cfg.vo}.${entity}InfoVo">
+        SELECT
+           id,
+        #foreach($field in ${cfg.exists_fields})
+           ${field.underscoreName}#if($foreach.hasNext), #end
+        #end
+        FROM
+           ${table.name}
+        WHERE
+           (#foreach($field in ${cfg.exists_fields})${field.underscoreName} = #{${field.name}}#if($foreach.hasNext) OR #end#end)
+        <if test="id != null and id>0">
+            AND id != id
+        </if>
+    </select>
+    #end
 
 </mapper>

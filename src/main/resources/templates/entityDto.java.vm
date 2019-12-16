@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * $!{table.comment}
+ * $!{table.comment} 查询参数
  * </p>
  *
  * @author ${author}
@@ -29,7 +29,7 @@ import java.io.Serializable;
 ## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
 #if(${swagger2})
-@ApiModel(value="${entity}KeyDto对象", description="$!{table.comment}")
+@ApiModel(value="$!{table.comment} 查询参数", description="$!{table.comment} 查询参数")
 #end
 public class ${entity}KeyDto implements Serializable {
 #if(${entitySerialVersionUID})

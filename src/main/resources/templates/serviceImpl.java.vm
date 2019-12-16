@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
  * <p>
- * $!{table.comment} 服务实现类
+ * $!{table.comment} service实现类
  * </p>
  *
  * @author ${author}
@@ -54,6 +54,10 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public ResultUtils<Integer> add(${entity}Po ${table.entityPath}){
 
+        #if(${cfg.exists_fields})
+        this.exists(0L, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        #end
+
         Integer flag = baseMapper.insert(${table.entityPath});
         if(flag.equals(1)){
             return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}.getId());
@@ -66,6 +70,10 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}){
 
+        #if(${cfg.exists_fields})
+        this.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        #end
+
         Integer flag = baseMapper.updateById(${table.entityPath});
         if(flag.equals(1)){
             return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
@@ -76,7 +84,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<Boolean> delById(Long id){
+    public ResultUtils<Boolean> delById(Integer id){
 
         boolean flag = removeById(id);
         if(flag){
@@ -88,7 +96,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<${entity}InfoVo> selectById(Long id){
+    public ResultUtils<${entity}InfoVo> getById(Integer id){
 
         ${entity}InfoVo ${table.entityPath}InfoVo = baseMapper.getById(id);
 
@@ -109,5 +117,21 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         return ResultUtils.SUCCESS(page);
     }
 
+
+    #if(${cfg.exists_fields})
+    void exists(Long id, #foreach($field in ${cfg.exists_fields}) String ${field.name}#if($foreach.hasNext), #end #end) {
+
+        List<${entity}InfoVo> list = baseMapper.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        if (!CollectionUtils.isEmpty(list)) {
+           for(${entity}InfoVo  ${table.entityPath}InfoVo : list) {
+
+              #foreach($field in ${cfg.exists_fields})
+              if(${table.entityPath}InfoVo.equals(${field.name}))
+                 throw new AplException("${field.upperCaseName}_EXIST", "${field.name}已经存在");
+              #end
+           }
+        }
+    }
+    #end
 }
 #end

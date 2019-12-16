@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * $!{table.comment}
+ * $!{table.comment} 详细实体
  * </p>
  *
  * @author ${author}
