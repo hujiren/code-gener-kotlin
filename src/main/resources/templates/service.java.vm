@@ -50,7 +50,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}InfoVo> getById(Integer id);
+        ResultUtils<${entity}InfoVo> selectById(Integer id);
 
 
         /**
