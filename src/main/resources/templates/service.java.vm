@@ -42,7 +42,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> delById(Integer id);
+        ResultUtils<Boolean> delById(Long id);
 
 
         /**
@@ -50,7 +50,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}InfoVo> selectById(Integer id);
+        ResultUtils<${entity}InfoVo> selectById(Long id);
 
 
         /**

@@ -76,7 +76,6 @@ private static final long serialVersionUID=1L;
 #if(${entityColumnConstant})
 #foreach($field in ${table.fields})
     public static final String ${field.name.toUpperCase()} = "${field.name}";
-
 #end
 #end
 #if(!${entityLombokModel})
