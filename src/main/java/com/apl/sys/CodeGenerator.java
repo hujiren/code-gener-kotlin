@@ -26,7 +26,7 @@ public class CodeGenerator {
     static final String IMPL_PACKAGE_NAME = "com.apl.wms";
     static final String CHILD_MODULE= "/apl-wms-wh-service-impl";
     static final String MODULE_NAME = "wh";
-    static String TABLE_INCLUDE =  "commodity_brand"; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String TABLE_INCLUDE =  ""; //表名(下划线)，不能为空;  例如：commodity_brand
     static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
 
 
@@ -196,8 +196,11 @@ public class CodeGenerator {
 
         String[] arr = EXISTS_FIELDS.split(",");
         for (String fieldName : arr) {
+            String fieldName2 = lineToHump(fieldName.trim());
+            String getMethodName = "get"+fieldName2.substring(0,1).toUpperCase()+fieldName2.substring(1)+"()";
             Map<String, String> fieldMap = new HashMap<>();
-            fieldMap.put("name", lineToHump(fieldName.trim())); //驼峰字段名
+            fieldMap.put("name", fieldName2); //驼峰字段名
+            fieldMap.put("getMethodName", getMethodName); //get方法
             fieldMap.put("underscoreName", fieldName.trim()); //下划线字段名
             fieldMap.put("upperCaseName", fieldName.toUpperCase().trim()); //大写字母字段名
 

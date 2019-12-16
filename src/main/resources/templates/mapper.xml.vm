@@ -83,7 +83,7 @@
         WHERE
            (#foreach($field in ${cfg.exists_fields})${field.underscoreName} = #{${field.name}}#if($foreach.hasNext) OR #end#end)
         <if test="id != null and id>0">
-            AND id != id
+            AND id !=  #{id}
         </if>
     </select>
     #end
