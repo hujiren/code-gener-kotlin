@@ -52,7 +52,7 @@ public class ${table.controllerName} {
     public ResultUtils<Integer> add(${entity}Po ${table.entityPath}Po) {
         ApiParamValidate.validate(${table.entityPath}Po);
 
-        return ${table.entityPath}Service.add(${table.entityPath});
+        return ${table.entityPath}Service.add(${table.entityPath}Po);
     }
 
 

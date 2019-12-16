@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apl.wms.order.mapper.InOrderOperatiorMapper">
+
+
+
+    <!-- 查找详情 2019-12-16-->
+    <select id="getById" resultType="com.apl.wms.order.vo.InOrderOperatiorInfoVo">
+        SELECT
+          id, 
+          commodity_id, 
+          service_id, 
+          service_name, 
+          qty, 
+          wt, 
+          operatior_time, 
+          operatior_name, 
+          operatior_remark, 
+          inner_org_id
+        FROM
+          in_order_operatior
+        where
+          id = #{id}
+    </select>
+
+    <!-- 查找列表 2019-12-16-->
+    <select id="getList" resultType="com.apl.wms.order.vo.InOrderOperatiorListVo">
+        SELECT
+           id, 
+           commodity_id, 
+           service_id, 
+           service_name, 
+           qty, 
+           wt, 
+           operatior_time, 
+           operatior_name, 
+           operatior_remark, 
+           inner_org_id
+        FROM
+           in_order_operatior
+        where
+        1 = 1
+        order by id desc
+    </select>
+
+
+</mapper>
