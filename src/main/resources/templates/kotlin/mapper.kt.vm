@@ -1,0 +1,46 @@
+package ${package.Mapper}
+
+import ${cfg.po}.${entity}Po
+import ${cfg.vo}.${entity}ListVo
+import ${cfg.vo}.${entity}InfoVo
+import ${cfg.dto}.${entity}KeyDto
+import ${superMapperClassPackage}
+import org.apache.ibatis.annotations.Param
+import java.util.List
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
+
+/**
+ * <p>
+ * $!{table.comment} Mapper 接口
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+
+interface ${table.mapperName} : ${superMapperClass}<${entity}Po>{
+
+    /**
+     * @Desc: 根据id 查找详情
+     * @Author: ${cfg.author}
+     * @Date: ${cfg.nowTime}
+     */
+    fun getById(@Param("id") id: Long): ${entity}InfoVo
+
+    /**
+     * @Desc: 查找列表
+     * @Author: ${cfg.author}
+     * @Date: ${cfg.nowTime}
+     */
+    fun getList(page: Page<Any> , @Param("kd") keyDto : ${entity}KeyDto ): List<${entity}ListVo>
+
+
+    #if(${cfg.exists_fields})
+        /**
+         * @Desc: 检测记录是否重复
+         * @Author: ${cfg.author}
+         * @Date: ${cfg.nowTime}
+         */
+        fun exists(@Param("id") id : Long , #foreach($field in ${cfg.exists_fields}) @Param("${field.name}") ${field.name} : String #if($foreach.hasNext), #end #end) : List<${entity}InfoVo>
+    #end
+}

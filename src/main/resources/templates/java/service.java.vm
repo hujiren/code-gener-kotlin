@@ -1,12 +1,12 @@
 package ${package.Service};
-import com.apl.common.utils.ResultUtils;
 
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
 import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 import ${superServiceClassPackage};
-import com.apl.common.pojo.dto.PageDto;
+import com.apl.lib.pojo.dto.PageDto;
+import com.apl.lib.utils.ResultUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
  * <p>
@@ -16,9 +16,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @author ${author}
  * @since ${date}
  */
-#if(${kotlin})
-interface ${table.serviceName} : ${superServiceClass}<${entity}Po>
-#else
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> {
 
         /**
@@ -60,5 +57,4 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          */
         ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
 
-}
-#end
+        }

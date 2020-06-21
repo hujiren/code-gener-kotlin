@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 #else
 import org.springframework.stereotype.Controller;
 #end
@@ -24,9 +25,9 @@ import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
 import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.apl.common.utils.ResultUtils;
-import com.apl.common.validate.ApiParamValidate;
+import com.apl.lib.pojo.dto.PageDto;
+import com.apl.lib.utils.ResultUtils;
+import com.apl.lib.validate.ApiParamValidate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 

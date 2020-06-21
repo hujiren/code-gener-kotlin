@@ -1,0 +1,60 @@
+package ${package.Service}
+import com.apl.common.utils.ResultUtils
+
+import ${cfg.po}.${entity}Po
+import ${cfg.vo}.${entity}ListVo
+import ${cfg.vo}.${entity}InfoVo
+import ${cfg.dto}.${entity}KeyDto
+import ${superServiceClassPackage}
+import com.apl.common.pojo.dto.PageDto
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
+/**
+ * <p>
+ * $!{table.comment} service接口
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+
+interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
+
+        /**
+         * @Desc: 添加一个${entity}Po实体
+         * @author ${author}
+         * @since ${date}
+         */
+        fun add(${table.entityPath} : ${entity}Po): ResultUtils<*>?
+
+
+        /**
+         * @Desc: 根据id 更新一个${entity}Po 实体
+         * @author ${author}
+         * @since ${date}
+         */
+        fun updById(${table.entityPath} : ${entity}Po): ResultUtils<*>?
+
+
+        /**
+         * @Desc: 根据id 查找一个${entity}Po 实体
+         * @author ${author}
+         * @since ${date}
+         */
+        fun delById(id : Long): ResultUtils<*>?
+
+
+        /**
+         * @Desc: 根据id 查找一个 ${entity}Po 实体
+         * @author ${author}
+         * @since ${date}
+         */
+        fun selectById(id : Long) : ResultUtils<*>?
+
+
+        /**
+         * @Desc: 分页查找 ${entity}Po 列表
+         * @author ${author}
+         * @since ${date}
+         */
+        fun getList(pageDto : PageDto<Any> , keyDto : ${entity}KeyDto) : ResultUtils<*>?
+}

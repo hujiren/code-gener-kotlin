@@ -1,0 +1,31 @@
+package ${cfg.dto}
+
+#foreach($pkg in ${table.importPackages})
+import ${pkg}
+#end
+#if(${swagger2})
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
+#end
+/**
+ * <p>
+ * $!{table.comment}
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${table.convert})
+@TableName("${table.name}")
+#end
+#if(${swagger2})
+@ApiModel(value="${entity}对象", description="$!{table.comment}")
+#end
+class ${entity}KeyDto : Serializable {
+
+
+    @ApiModelProperty(name = "keyword", value = "关键词")
+    var keyword : String? = null
+
+
+}
