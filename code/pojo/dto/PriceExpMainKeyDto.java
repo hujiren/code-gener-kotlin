@@ -1,4 +1,4 @@
-package com.apl.lms.common.pojo.dto;
+package com.apl.lms.price.exp.pojo.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 计件方式 分页查询对象
+ *  分页查询对象
  * </p>
  *
  * @author hjr
@@ -16,8 +16,8 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="计件方式 分页查询对象", description="计件方式 分页查询对象")
-public class CountWayKeyDto implements Serializable {
+@ApiModel(value=" 分页查询对象", description=" 分页查询对象")
+public class PriceExpMainKeyDto implements Serializable {
 
     private static final long serialVersionUID=1L;
 

@@ -1,4 +1,4 @@
-package com.apl.lms.common.service.impl;
+package com.apl.lms.price.exp.manage.service.impl;
 
 import com.apl.lib.pojo.dto.PageDto;
 import com.apl.lib.utils.ResultUtils;
@@ -6,14 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.apl.lib.constants.CommonStatusCode;
 
-import com.baomidou.mapper.CountWayMapper;
-import com.baomidou.service.CountWayService;
+import com.baomidou.mapper.PriceExpMainMapper;
+import com.baomidou.service.PriceExpMainService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.apl.lms.common.pojo.po.CountWayPo;
-import com.apl.lms.common.pojo.vo.CountWayListVo;
-import com.apl.lms.common.pojo.vo.CountWayInfoVo;
-import com.apl.lms.common.pojo.dto.CountWayKeyDto;
+import com.apl.lms.price.exp.pojo.po.PriceExpMainPo;
+import com.apl.lms.price.exp.pojo.vo.PriceExpMainListVo;
+import com.apl.lms.price.exp.pojo.vo.PriceExpMainInfoVo;
+import com.apl.lms.price.exp.pojo.dto.PriceExpMainKeyDto;
 
 import java.util.List;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
  * <p>
- * 计件方式 service实现类
+ *  service实现类
  * </p>
  *
  * @author hjr
@@ -29,17 +29,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  */
 @Service
 @Slf4j
-public class CountWayServiceImpl extends ServiceImpl<CountWayMapper, CountWayPo> implements CountWayService {
+public class PriceExpMainServiceImpl extends ServiceImpl<PriceExpMainMapper, PriceExpMainPo> implements PriceExpMainService {
 
     //状态code枚举
-    /*enum CountWayServiceCode {
+    /*enum PriceExpMainServiceCode {
 
             ;
 
             private String code;
             private String msg;
 
-            CountWayServiceCode(String code, String msg) {
+            PriceExpMainServiceCode(String code, String msg) {
                  this.code = code;
                  this.msg = msg;
             }
@@ -47,15 +47,12 @@ public class CountWayServiceImpl extends ServiceImpl<CountWayMapper, CountWayPo>
 
 
     @Override
-    public ResultUtils<Long> add(CountWayAddDto countWayAddDto){
+    public ResultUtils<Long> add(PriceExpMainPo priceExpMainPo){
 
 
-        CountWayPo countWayPo = new CountWayPo();
-        BeanUtil.copyProperties(countWayAddDto, countWayPo);
-
-        Integer flag = baseMapper.insert(countWayPo);
+        Integer flag = baseMapper.insert(priceExpMainPo);
         if(flag.equals(1)){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , countWayPo.getId());
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , priceExpMainPo.getId());
         }
 
         return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null);
@@ -63,13 +60,10 @@ public class CountWayServiceImpl extends ServiceImpl<CountWayMapper, CountWayPo>
 
 
     @Override
-    public ResultUtils<Boolean> updById(CountWayUpdDto countWayUpdDto){
+    public ResultUtils<Boolean> updById(PriceExpMainPo priceExpMainPo){
 
 
-        CountWayPo countWayPo = new CountWayPo();
-        BeanUtil.copyProperties(countWayUpdDto, countWayPo);
-
-        Integer flag = baseMapper.updateById(countWayPo);
+        Integer flag = baseMapper.updateById(priceExpMainPo);
         if(flag.equals(1)){
             return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
         }
@@ -91,22 +85,22 @@ public class CountWayServiceImpl extends ServiceImpl<CountWayMapper, CountWayPo>
 
 
     @Override
-    public ResultUtils<CountWayInfoVo> selectById(Long id){
+    public ResultUtils<PriceExpMainInfoVo> selectById(Long id){
 
-        CountWayInfoVo countWayInfoVo = baseMapper.getById(id);
+        PriceExpMainInfoVo priceExpMainInfoVo = baseMapper.getById(id);
 
-        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, countWayInfoVo);
+        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, priceExpMainInfoVo);
     }
 
 
     @Override
-    public ResultUtils<Page<CountWayListVo>> getList(PageDto pageDto, CountWayKeyDto keyDto){
+    public ResultUtils<Page<PriceExpMainListVo>> getList(PageDto pageDto, PriceExpMainKeyDto keyDto){
 
-        Page<CountWayListVo> page = new Page();
+        Page<PriceExpMainListVo> page = new Page();
         page.setCurrent(pageDto.getPageIndex());
         page.setSize(pageDto.getPageSize());
 
-        List<CountWayListVo> list = baseMapper.getList(page , keyDto);
+        List<PriceExpMainListVo> list = baseMapper.getList(page , keyDto);
         page.setRecords(list);
 
         return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS , page);
