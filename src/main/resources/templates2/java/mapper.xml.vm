@@ -5,8 +5,8 @@
     #if(${enableCache})
         <!-- 开启二级缓存 -->
         <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-    #end
 
+    #end
     <!-- 查找详情 ${cfg.nowTime}-->
     <select id="getById" resultType="${cfg.vo}.${entity}InfoVo">
         SELECT

@@ -87,8 +87,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public ResultUtils<Boolean> delById(Long id){
 
-        boolean flag = removeById(id);
-        if(flag){
+        Integer flag = baseMapper.deleteById(id);
+        if(flag > 0){
             return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true);
         }
 

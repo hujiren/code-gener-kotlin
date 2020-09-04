@@ -36,7 +36,7 @@ import javax.validation.constraints.NotNull;
  * @since ${date}
  */
 @RestController
-@RequestMapping("/${table.name}")
+@RequestMapping(value = "/${table.name}")
 @Validated
 @Api(value = "$!{table.comment}",tags = "$!{table.comment}")
 @Slf4j
@@ -49,7 +49,7 @@ public class ${table.controllerName} {
     @PostMapping(value = "/add")
     @ApiOperation(value =  "添加", notes ="#foreach($field in ${cfg.exists_fields})${field.upperCaseName}_EXIST -> ${field.name}已经存在#if($foreach.hasNext)\n"+
                                          "#end#end")
-    public ResultUtils<Long> add(${entity}AddDto ${table.entityPath}AddDto) {
+    public ResultUtils<Long> add(@Validated ${entity}AddDto ${table.entityPath}AddDto) {
         ApiParamValidate.validate(${table.entityPath}AddDto);
 
         return ${table.entityPath}Service.add(${table.entityPath}AddDto);
@@ -59,7 +59,7 @@ public class ${table.controllerName} {
     @PostMapping(value = "/upd")
     @ApiOperation(value =  "更新",  notes ="#foreach($field in ${cfg.exists_fields})${field.upperCaseName}_EXIST -> ${field.name}已经存在#if($foreach.hasNext)\n"+
                                           "#end#end")
-    public ResultUtils<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto) {
+    public ResultUtils<Boolean> updById(@Validated ${entity}UpdDto ${table.entityPath}UpdDto) {
         ApiParamValidate.notEmpty("id", ${table.entityPath}UpdDto.getId());
         ApiParamValidate.validate(${table.entityPath}UpdDto);
 
@@ -85,7 +85,7 @@ public class ${table.controllerName} {
     }
 
 
-    @PostMapping("/get-list")
+    @PostMapping(value = "/get-list")
     @ApiOperation(value =  "分页查找" , notes = "分页查找")
     public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto, @Validated ${entity}KeyDto keyDto) {
 

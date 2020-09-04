@@ -41,7 +41,7 @@ public class CountryController {
 
     @PostMapping(value = "/add")
     @ApiOperation(value =  "添加", notes ="")
-    public ResultUtils<Long> add(CountryAddDto countryAddDto) {
+    public ResultUtils<Long> add(@Validated CountryAddDto countryAddDto) {
         ApiParamValidate.validate(countryAddDto);
 
         return countryService.add(countryAddDto);
@@ -50,7 +50,7 @@ public class CountryController {
 
     @PostMapping(value = "/upd")
     @ApiOperation(value =  "更新",  notes ="")
-    public ResultUtils<Boolean> updById(CountryUpdDto countryUpdDto) {
+    public ResultUtils<Boolean> updById(@Validated CountryUpdDto countryUpdDto) {
         ApiParamValidate.notEmpty("id", countryUpdDto.getId());
         ApiParamValidate.validate(countryUpdDto);
 

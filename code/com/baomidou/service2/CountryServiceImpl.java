@@ -75,8 +75,8 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
     @Override
     public ResultUtils<Boolean> delById(Long id){
 
-        boolean flag = removeById(id);
-        if(flag){
+        Integer flag = baseMapper.deleteById(id);
+        if(flag > 0){
             return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true);
         }
 

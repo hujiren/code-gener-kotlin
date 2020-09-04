@@ -49,7 +49,6 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
     @Override
     public ResultUtils<Long> add(CountryAddDto countryAddDto){
 
-
         CountryPo countryPo = new CountryPo();
         BeanUtil.copyProperties(countryAddDto, countryPo);
 
@@ -64,7 +63,6 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
 
     @Override
     public ResultUtils<Boolean> updById(CountryUpdDto countryUpdDto){
-
 
         CountryPo countryPo = new CountryPo();
         BeanUtil.copyProperties(countryUpdDto, countryPo);
@@ -81,8 +79,8 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
     @Override
     public ResultUtils<Boolean> delById(Long id){
 
-        boolean flag = removeById(id);
-        if(flag){
+        Integer flag = baseMapper.deleteById(id);
+        if(flag > 0){
             return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true);
         }
 
