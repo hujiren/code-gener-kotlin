@@ -1,0 +1,129 @@
+package ${package.ServiceImpl}
+import com.apl.common.utils.ResultUtils
+import lombok.extern.slf4j.Slf4j
+import org.springframework.stereotype.Service
+import com.apl.common.constants.CommonStatusCode
+
+import ${package.Mapper}.${table.mapperName}
+import ${package.Service}.${table.serviceName}
+import ${superServiceImplClassPackage}
+
+import ${cfg.po}.${entity}Po
+import ${cfg.vo}.${entity}ListVo
+import ${cfg.vo}.${entity}InfoVo
+import ${cfg.dto}.${entity}KeyDto
+
+import java.util.*
+import com.apl.common.pojo.dto.PageDto
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
+
+
+/**
+ * <p>
+ * $!{table.comment} service实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+@Slf4j
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}Po>(), ${table.serviceName} {
+
+    //状态code枚举
+    /*enum ${table.serviceName}Code {
+
+
+
+        private String code
+        private String msg
+
+        ${table.serviceName}Code(String code, String msg) {
+             this.code = code
+             this.msg = msg
+        }
+    }*/
+
+    override fun add(${table.entityPath} : ${entity}Po) : ResultUtils<*>? {
+
+        #if(${cfg.exists_fields})
+        this.exists(0L, #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end)
+        #end
+
+        var flag = baseMapper.insert(${table.entityPath})
+        if(flag == 1){
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}.getId())
+        }
+
+        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null)
+    }
+
+
+    override fun updById(${table.entityPath} : ${entity}Po) : ResultUtils<*>?  {
+
+        #if(${cfg.exists_fields})
+            this.exists(${table.entityPath}.getId(), #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end)
+        #end
+
+        var flag = baseMapper.updateById(${table.entityPath})
+        if(flag == 1){
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true)
+        }
+
+        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , false)
+    }
+
+
+    override fun delById(id : Long) : ResultUtils<*>?  {
+
+        var flag = removeById(id)
+        if(flag){
+            return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true)
+        }
+
+        return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , false)
+    }
+
+
+    override fun  selectById(id : Long) : ResultUtils<*>? {
+
+        var ${table.entityPath}InfoVo = baseMapper.getById(id)
+
+        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS , ${table.entityPath}InfoVo)
+    }
+
+
+    override fun getList(pageDto :PageDto , keyDto : ${entity}KeyDto) : ResultUtils<*>? {
+
+        var page = Page<Any>()
+        page.current = pageDto.getPageIndex()
+        page.size = pageDto.getPageSize()
+
+        var list = baseMapper.getList(page , keyDto)
+
+        val contacts: MutableList<Any> =  ArrayList(list)
+
+        page.records = contacts
+
+        return ResultUtils.SUCCESS(page)
+    }
+
+
+    #if(${cfg.exists_fields})
+        exists(id : Long , #foreach($field in ${cfg.exists_fields}) ${field.name} : String #if($foreach.hasNext), #end #end) {
+
+            var list = baseMapper.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end)
+            if (!CollectionUtils.isEmpty(list)) {
+                for(${table.entityPath}InfoVo in list) {
+
+                    #foreach($field in ${cfg.exists_fields})
+                        if(${table.entityPath}InfoVo.${field.getMethodName}.equals(${field.name}))
+                            throw new AplException("${field.upperCaseName}_EXIST", "${field.name}已经存在")
+                    #end
+                }
+            }
+        }
+    #end
+
+
+}

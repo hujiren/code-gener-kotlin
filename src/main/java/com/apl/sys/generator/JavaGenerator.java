@@ -25,30 +25,57 @@ public class JavaGenerator implements Generator {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/" + GeneratorConfig.CHILD_MODULE  +  "/src/main/java/" + GeneratorConfig.POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "ListVo.java";
+                return System.getProperty("user.dir") + "/code/pojo/vo/"+ tableInfo.getEntityName() + "ListVo.java";
             }
         });
+
         focList.add(new FileOutConfig("/templates/java/entityInfoVo.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/" + GeneratorConfig.CHILD_MODULE  +  "/src/main/java/" + GeneratorConfig.POJO_PACKAGE_NAME.replaceAll("\\." , "/")  + "/vo/"+ tableInfo.getEntityName() + "InfoVo.java";
+                return System.getProperty("user.dir") + "/code/pojo/vo/"+ tableInfo.getEntityName() + "InfoVo.java";
             }
         });
-        focList.add(new FileOutConfig("/templates/java/entityDto.java.vm") {
+
+        focList.add(new FileOutConfig("/templates/java/entityKeyDto.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/" + GeneratorConfig.CHILD_MODULE  +  "/src/main/java/" + GeneratorConfig.POJO_PACKAGE_NAME.replaceAll("\\." , "/") + "/dto/"+ tableInfo.getEntityName() + "KeyDto.java";
+                return System.getProperty("user.dir") + "/code/pojo/dto/"+ tableInfo.getEntityName() + "KeyDto.java";
             }
         });
+
+        focList.add(new FileOutConfig("/templates/java/entityAddDto.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/code/pojo/dto/"+ tableInfo.getEntityName() + "AddDto.java";
+            }
+        });
+
+        focList.add(new FileOutConfig("/templates/java/entityUpdDto.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/code/pojo/dto/"+ tableInfo.getEntityName() + "UpdDto.java";
+            }
+        });
+
         focList.add(new FileOutConfig("/templates/java/entityPo.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/" + GeneratorConfig.CHILD_MODULE  +  "/src/main/java/" + GeneratorConfig.POJO_PACKAGE_NAME.replaceAll("\\." , "/") + "/po/"+ tableInfo.getEntityName() + "Po.java";
+                return System.getProperty("user.dir") + "/code/pojo/po/"+ tableInfo.getEntityName() + "Po.java";
             }
         });
+
+        /*focList.add(new FileOutConfig("/templates/java/entitySaveDto.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/code/pojo/dto/"+ tableInfo.getEntityName() + "SaveDto.java";
+            }
+        });*/
 
         GeneratorConfig.cfg.setFileOutConfigList(focList);
         GeneratorConfig.mpg.setCfg(GeneratorConfig.cfg);

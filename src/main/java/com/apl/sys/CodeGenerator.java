@@ -15,8 +15,8 @@ public class CodeGenerator {
      */
     public static void main(String[] args) {
 
-        Generator generator = new KotlinGenerator();
-        //Generator generator = new JavaGenerator();
+//        Generator generator = new KotlinGenerator();
+        Generator generator = new JavaGenerator();
 
 
 

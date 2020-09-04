@@ -1,13 +1,13 @@
-package ${package.Service};
+package ${package.Service}
+import com.apl.common.utils.ResultUtils
 
-import ${cfg.po}.${entity}Po;
-import ${cfg.vo}.${entity}ListVo;
-import ${cfg.vo}.${entity}InfoVo;
-import ${cfg.dto}.${entity}KeyDto;
-import ${superServiceClassPackage};
-import com.apl.lib.pojo.dto.PageDto;
-import com.apl.lib.utils.ResultUtils;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${cfg.po}.${entity}Po
+import ${cfg.vo}.${entity}ListVo
+import ${cfg.vo}.${entity}InfoVo
+import ${cfg.dto}.${entity}KeyDto
+import ${superServiceClassPackage}
+import com.apl.common.pojo.dto.PageDto
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 /**
  * <p>
  * $!{table.comment} service接口
@@ -16,14 +16,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @author ${author}
  * @since ${date}
  */
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> {
+
+interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
 
         /**
          * @Desc: 添加一个${entity}Po实体
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Integer> add(${entity}Po ${table.entityPath});
+        fun add(${table.entityPath} : ${entity}Po): ResultUtils<*>?
 
 
         /**
@@ -31,7 +32,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> updById(${entity}Po ${table.entityPath});
+        fun updById(${table.entityPath} : ${entity}Po): ResultUtils<*>?
 
 
         /**
@@ -39,7 +40,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> delById(Long id);
+        fun delById(id : Long): ResultUtils<*>?
 
 
         /**
@@ -47,7 +48,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}InfoVo> selectById(Long id);
+        fun selectById(id : Long) : ResultUtils<*>?
 
 
         /**
@@ -55,6 +56,5 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
-
+        fun getList(pageDto : PageDto<Any> , keyDto : ${entity}KeyDto) : ResultUtils<*>?
 }

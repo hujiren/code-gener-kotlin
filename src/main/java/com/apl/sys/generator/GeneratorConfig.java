@@ -28,25 +28,27 @@ public class GeneratorConfig {
     public static Boolean isKotlin = false;
 
 
-    static final String AUTHOR = "cy";
+    static final String AUTHOR = "hjr";
     static final String DB_USER = "root";
     static final String DB_PWD = "123456";
-    static final String DB_URL = "jdbc:mysql://192.168.1.185:3307/cy_test_order?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    static final String DB_URL = "jdbc:mysql://192.168.1.185:3307/pgs_lms_common?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
-    static final String POJO_PACKAGE_NAME = "com.apl.wms.order";
-    static final String IMPL_PACKAGE_NAME = "com.apl.wms.order";
-    static final String CHILD_MODULE= "/apl-wms-order-outstorage-service-impl";
-    static final String MODULE_NAME = "order";
-    static String TABLE_INCLUDE =  "dept"; //表名(下划线)，不能为空;  例如：commodity_brand
-    static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： brand_name, brand_name_en
-
+    static final String POJO_PACKAGE_NAME = "com.apl.lms.common.pojo.po";
+    static final String IMPL_PACKAGE_NAME = "";
+    static final String CHILD_MODULE= "lmsc-ommon";
+    static final String MODULE_NAME = "";
+    static String TABLE_INCLUDE =  "country"; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： country_code,name_cn
 
     static final String SYSTEM_PATH = System.getProperty("user.dir");
-    static final String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + CHILD_MODULE  + "/src/main/java";
+    static String JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + "/code";
 
 
     public static void init(){
 
+        JAVA_OUT_PUT_TO_PROJECT = SYSTEM_PATH + "/code";
+        if(MODULE_NAME.length()>0)
+            JAVA_OUT_PUT_TO_PROJECT += "/" +CHILD_MODULE ;
 
         if(GeneratorConfig.TABLE_INCLUDE==null || GeneratorConfig.TABLE_INCLUDE.trim().equals("")){
             System.out.println("表名不能为空");

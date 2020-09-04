@@ -57,4 +57,4 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          */
         ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
 
-}
+        }

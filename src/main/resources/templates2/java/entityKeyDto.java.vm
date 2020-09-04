@@ -1,0 +1,49 @@
+package ${cfg.dto};
+
+#if(${swagger2})
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+#end
+#if(${entityLombokModel})
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+## -----   导入 Accessors 去除   ----- import lombok.experimental.Accessors;
+#end
+import java.io.Serializable;
+
+/**
+ * <p>
+ * $!{table.comment} 查询参数
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${entityLombokModel})
+@Data
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
+## -----   @Accessors去除   ----- @Accessors(chain = true)
+#end
+#if(${swagger2})
+@ApiModel(value="$!{table.comment} 查询参数", description="$!{table.comment} 查询参数")
+#end
+public class ${entity}KeyDto implements Serializable {
+#if(${entitySerialVersionUID})
+
+    private static final long serialVersionUID=1L;
+#end
+
+    @ApiModelProperty(name = "keyword", value = "关键词")
+    private String keyword;
+
+    public String getKeyword() {
+        if (keyword != null && keyword.trim().equals(""))
+            keyword = null;
+
+        return keyword;
+    }
+}
