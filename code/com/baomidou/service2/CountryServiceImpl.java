@@ -1,18 +1,19 @@
-package service.impl;
+package com.apl.lms.price.exp.manage.service.impl;
+
 import com.apl.lib.pojo.dto.PageDto;
 import com.apl.lib.utils.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.apl.lib.constants.CommonStatusCode;
 
-import mapper.CountryMapper;
-import service.CountryService;
+import com.baomidou.mapper.CountryMapper;
+import com.baomidou.service.CountryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.apl.lms.common.pojo.po.po.CountryPo;
-import com.apl.lms.common.pojo.po.vo.CountryListVo;
-import com.apl.lms.common.pojo.po.vo.CountryInfoVo;
-import com.apl.lms.common.pojo.po.dto.CountryKeyDto;
+import com.apl.lms.common.pojo.po.CountryPo;
+import com.apl.lms.common.pojo.vo.CountryListVo;
+import com.apl.lms.common.pojo.vo.CountryInfoVo;
+import com.apl.lms.common.pojo.dto.CountryKeyDto;
 
 import java.util.List;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -46,12 +47,12 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
 
 
     @Override
-    public ResultUtils<Integer> add(CountryPo country){
+    public ResultUtils<Long> add(CountryPo countryPo){
 
 
-        Integer flag = baseMapper.insert(country);
+        Integer flag = baseMapper.insert(countryPo);
         if(flag.equals(1)){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , country.getId());
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , countryPo.getId());
         }
 
         return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null);
@@ -59,10 +60,10 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
 
 
     @Override
-    public ResultUtils<Boolean> updById(CountryPo country){
+    public ResultUtils<Boolean> updById(CountryPo countryPo){
 
 
-        Integer flag = baseMapper.updateById(country);
+        Integer flag = baseMapper.updateById(countryPo);
         if(flag.equals(1)){
             return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
         }

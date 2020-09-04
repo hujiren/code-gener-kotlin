@@ -47,14 +47,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<Long> add(${entity}AddDto ${table.entityPath}AddDto){
+    public ResultUtils<Long> add(${entity}Po ${table.entityPath}Po){
 
     #if(${cfg.exists_fields})
-        this.exists(0L, #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end);
+        this.exists(0L, #foreach($field in ${cfg.exists_fields})${table.entityPath}Po.${field.getMethodName}#if($foreach.hasNext), #end #end);
     #end
-
-        ${entity}Po ${table.entityPath}Po = new ${entity}Po();
-        BeanUtil.copyProperties(${table.entityPath}AddDto, ${table.entityPath}Po);
 
         Integer flag = baseMapper.insert(${table.entityPath}Po);
         if(flag.equals(1)){
@@ -66,14 +63,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
     @Override
-    public ResultUtils<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto){
+    public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}Po){
 
     #if(${cfg.exists_fields})
-        this.exists(${table.entityPath}.getId(), #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end);
+        this.exists(${table.entityPath}Po.getId(), #foreach($field in ${cfg.exists_fields})${table.entityPath}Po.${field.getMethodName}#if($foreach.hasNext), #end #end);
     #end
-
-        ${entity}Po ${table.entityPath}Po = new ${entity}Po();
-        BeanUtil.copyProperties(${table.entityPath}UpdDto, ${table.entityPath}Po);
 
         Integer flag = baseMapper.updateById(${table.entityPath}Po);
         if(flag.equals(1)){

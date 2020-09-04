@@ -1,4 +1,4 @@
-package com.apl.lms.common.pojo.po.dto;
+package com.apl.lms.common.pojo.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -49,21 +49,21 @@ public class ${table.controllerName} {
     @PostMapping(value = "/add")
     @ApiOperation(value =  "添加", notes ="#foreach($field in ${cfg.exists_fields})${field.upperCaseName}_EXIST -> ${field.name}已经存在#if($foreach.hasNext)\n"+
                                          "#end#end")
-    public ResultUtils<Long> add(${entity}AddDto ${table.entityPath}AddDto) {
-        ApiParamValidate.validate(${table.entityPath}AddDto);
+    public ResultUtils<Long> add(${entity}Po ${table.entityPath}Po) {
+        ApiParamValidate.validate(${table.entityPath}Po);
 
-        return ${table.entityPath}Service.add(${table.entityPath}AddDto);
+        return ${table.entityPath}Service.add(${table.entityPath}Po);
     }
 
 
     @PostMapping(value = "/upd")
     @ApiOperation(value =  "更新",  notes ="#foreach($field in ${cfg.exists_fields})${field.upperCaseName}_EXIST -> ${field.name}已经存在#if($foreach.hasNext)\n"+
                                           "#end#end")
-    public ResultUtils<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto) {
-        ApiParamValidate.notEmpty("id", ${table.entityPath}UpdDto.getId());
-        ApiParamValidate.validate(${table.entityPath}UpdDto);
+    public ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}Po) {
+        ApiParamValidate.notEmpty("id", ${table.entityPath}Po.getId());
+        ApiParamValidate.validate(${table.entityPath}Po);
 
-        return ${table.entityPath}Service.updById(${table.entityPath}UpdDto);
+        return ${table.entityPath}Service.updById(${table.entityPath}Po);
     }
 
 

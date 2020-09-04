@@ -1,9 +1,9 @@
-package service;
+package com.apl.lms.price.exp.manage.service;
 
-import com.apl.lms.common.pojo.po.po.CountryPo;
-import com.apl.lms.common.pojo.po.vo.CountryListVo;
-import com.apl.lms.common.pojo.po.vo.CountryInfoVo;
-import com.apl.lms.common.pojo.po.dto.CountryKeyDto;
+import com.apl.lms.common.pojo.po.CountryPo;
+import com.apl.lms.common.pojo.vo.CountryListVo;
+import com.apl.lms.common.pojo.vo.CountryInfoVo;
+import com.apl.lms.common.pojo.dto.CountryKeyDto;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.apl.lib.pojo.dto.PageDto;
 import com.apl.lib.utils.ResultUtils;
@@ -23,7 +23,7 @@ public interface CountryService extends IService<CountryPo> {
          * @author hjr
          * @since 2020-09-04
          */
-        ResultUtils<Integer> add(CountryPo country);
+        ResultUtils<Long> add(CountryAddDto countryAddDto);
 
 
         /**
@@ -31,7 +31,7 @@ public interface CountryService extends IService<CountryPo> {
          * @author hjr
          * @since 2020-09-04
          */
-        ResultUtils<Boolean> updById(CountryPo country);
+        ResultUtils<Boolean> updById(CountryUpdDto countryUpdDto);
 
 
         /**

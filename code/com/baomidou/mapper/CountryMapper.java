@@ -1,9 +1,9 @@
-package mapper;
+package com.baomidou.mapper;
 
-import com.apl.lms.common.pojo.po.po.CountryPo;
-import com.apl.lms.common.pojo.po.vo.CountryListVo;
-import com.apl.lms.common.pojo.po.vo.CountryInfoVo;
-import com.apl.lms.common.pojo.po.dto.CountryKeyDto;
+import com.apl.lms.common.pojo.po.CountryPo;
+import com.apl.lms.common.pojo.vo.CountryListVo;
+import com.apl.lms.common.pojo.vo.CountryInfoVo;
+import com.apl.lms.common.pojo.dto.CountryKeyDto;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -34,5 +34,4 @@ public CountryInfoVo getById(@Param("id") Long id);
         List<CountryListVo> getList(Page page, @Param("kd") CountryKeyDto keyDto);
 
 
-
-        }
+}

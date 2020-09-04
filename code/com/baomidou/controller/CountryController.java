@@ -1,5 +1,4 @@
-package controller;
-
+package com.apl.lms.price.exp.manage.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.apl.common.pojo.dto.PageDto;
 import org.springframework.web.bind.annotation.*;
-import service.CountryService;
-import com.apl.lms.common.pojo.po.po.CountryPo;
-import com.apl.lms.common.pojo.po.vo.CountryListVo;
-import com.apl.lms.common.pojo.po.vo.CountryInfoVo;
-import com.apl.lms.common.pojo.po.dto.CountryKeyDto;
+import com.baomidou.service.CountryService;
+import com.apl.lms.common.pojo.po.CountryPo;
+import com.apl.lms.common.pojo.vo.CountryListVo;
+import com.apl.lms.common.pojo.vo.CountryInfoVo;
+import com.apl.lms.common.pojo.dto.CountryKeyDto;
 import com.apl.lib.pojo.dto.PageDto;
 import com.apl.lib.utils.ResultUtils;
 import com.apl.lib.validate.ApiParamValidate;
@@ -42,20 +41,20 @@ public class CountryController {
 
     @PostMapping(value = "/add")
     @ApiOperation(value =  "添加", notes ="")
-    public ResultUtils<Integer> add(CountryPo countryPo) {
-        ApiParamValidate.validate(countryPo);
+    public ResultUtils<Long> add(CountryAddDto countryAddDto) {
+        ApiParamValidate.validate(countryAddDto);
 
-        return countryService.add(countryPo);
+        return countryService.add(countryAddDto);
     }
 
 
     @PostMapping(value = "/upd")
     @ApiOperation(value =  "更新",  notes ="")
-    public ResultUtils<Boolean> updById(CountryPo countryPo) {
-        ApiParamValidate.notEmpty("id", countryPo.getId());
-        ApiParamValidate.validate(countryPo);
+    public ResultUtils<Boolean> updById(CountryUpdDto countryUpdDto) {
+        ApiParamValidate.notEmpty("id", countryUpdDto.getId());
+        ApiParamValidate.validate(countryUpdDto);
 
-        return countryService.updById(countryPo);
+        return countryService.updById(countryUpdDto);
     }
 
 

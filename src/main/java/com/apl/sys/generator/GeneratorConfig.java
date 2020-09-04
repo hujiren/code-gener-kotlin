@@ -33,8 +33,8 @@ public class GeneratorConfig {
     static final String DB_PWD = "123456";
     static final String DB_URL = "jdbc:mysql://192.168.1.185:3307/pgs_lms_common?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
-    static final String POJO_PACKAGE_NAME = "com.apl.lms.common.pojo.po";
-    static final String IMPL_PACKAGE_NAME = "";
+    static final String POJO_PACKAGE_NAME = "com.apl.lms.common.pojo";
+    static final String SERVICE_PACKAGE_NAME = "com.apl.lms.price.exp.manage";
     static final String CHILD_MODULE= "lmsc-ommon";
     static final String MODULE_NAME = "";
     static String TABLE_INCLUDE =  "country"; //表名(下划线)，不能为空;  例如：commodity_brand
@@ -109,7 +109,7 @@ public class GeneratorConfig {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent(GeneratorConfig.IMPL_PACKAGE_NAME);
+        //pc.setParent(GeneratorConfig.SERVICE_PACKAGE_NAME);
         //pc.setModuleName(MODULE_NAME);
         //pc.setEntity("po");
         pc.setXml("mapper/mapper");
@@ -122,6 +122,8 @@ public class GeneratorConfig {
             @Override
             public void initMap() {
                 Map<String , Object> map = new HashMap<>();
+                map.put("packageName" , GeneratorConfig.SERVICE_PACKAGE_NAME);
+
                 map.put("vo" , GeneratorConfig.POJO_PACKAGE_NAME + ".vo");
                 map.put("dto" , GeneratorConfig.POJO_PACKAGE_NAME + ".dto");
                 map.put("po" , GeneratorConfig.POJO_PACKAGE_NAME + ".po");

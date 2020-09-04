@@ -1,4 +1,4 @@
-package com.apl.lms.common.pojo.po.po;
+package com.apl.lms.common.pojo.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

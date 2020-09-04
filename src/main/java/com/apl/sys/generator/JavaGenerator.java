@@ -69,13 +69,31 @@ public class JavaGenerator implements Generator {
             }
         });
 
-        /*focList.add(new FileOutConfig("/templates/java/entitySaveDto.java.vm") {
+        focList.add(new FileOutConfig("/templates/java/controller2.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
 
-                return System.getProperty("user.dir") + "/code/pojo/dto/"+ tableInfo.getEntityName() + "SaveDto.java";
+                return System.getProperty("user.dir") + "/code/com/baomidou/controller2/"+ tableInfo.getEntityName() + "Controller.java";
             }
-        });*/
+        });
+
+        focList.add(new FileOutConfig("/templates/java/service2.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/code/com/baomidou/service2/"+ tableInfo.getEntityName() + "Service.java";
+            }
+        });
+
+        focList.add(new FileOutConfig("/templates/java/serviceImpl2.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/code/com/baomidou/service2/"+ tableInfo.getEntityName() + "ServiceImpl.java";
+            }
+        });
+
+
 
         GeneratorConfig.cfg.setFileOutConfigList(focList);
         GeneratorConfig.mpg.setCfg(GeneratorConfig.cfg);
