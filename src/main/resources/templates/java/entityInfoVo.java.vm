@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * $!{table.comment} 持久化对象
+ * $!{table.comment} 返回对象
  * </p>
  *
  * @author ${author}
@@ -28,53 +28,53 @@ import lombok.EqualsAndHashCode;
  */
 #if(${entityLombokModel})
 @Data
-    #if(${superEntityClass})
-    @EqualsAndHashCode(callSuper = true)
-    #else
-    @EqualsAndHashCode(callSuper = false)
-    #end
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
 ## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
 @TableName("${table.name}")
 #if(${swagger2})
-@ApiModel(value="$!{table.comment} 持久化对象", description="$!{table.comment} 持久化对象")
+@ApiModel(value="$!{table.comment} 返回对象", description="$!{table.comment} 返回对象")
 #end
 public class ${entity}InfoVo implements Serializable {
 
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
-    #if(${field.keyFlag})
-        #set($keyPropertyName=${field.propertyName})
-    #end
-    #if("$!field.comment" != "")
-        #if(!${field.keyFlag})
-            #if(${field.name} != "inner_org_id")
-                #if(${swagger2})
-                @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}" , required = true)
-                    #if("${field.columnType}" == "STRING")
-                    @NotEmpty(message = "${field.comment}不能为空")
-                    #end
-                    #if("${field.columnType}" == "INTEGER")
-                    @NotNull(message = "${field.comment}不能为空")
-                    @Min(value = 0 , message = "${field.comment}不合法")
-                    #end
-                    #if("${field.columnType}" == "BIG_DECIMAL")
-                    @NotNull(message = "${field.comment}不能为空")
-                    @Min(value = 0 , message = "${field.comment}不合法")
-                    #end
-                    #if("${field.columnType}" == "LONG")
-                    @NotNull(message = "${field.comment}不能为空")
-                    @Min(value = 0 , message = "${field.comment}不不合法")
-                    #end
-                #else
-                /**
-                 * ${field.comment}
-                 */
+#if(${field.keyFlag})
+    #set($keyPropertyName=${field.propertyName})
+#end
+#if("$!field.comment" != "")
+    #if(!${field.keyFlag})
+        #if(${field.name} != "inner_org_id")
+            #if(${swagger2})
+            @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}")
+                #if("${field.columnType}" == "STRING")
+                @NotEmpty(message = "${field.comment}不能为空")
                 #end
+                #if("${field.columnType}" == "INTEGER")
+                @NotNull(message = "${field.comment}不能为空")
+                @Min(value = 0 , message = "${field.comment}不合法")
+                #end
+                #if("${field.columnType}" == "BIG_DECIMAL")
+                @NotNull(message = "${field.comment}不能为空")
+                @Min(value = 0 , message = "${field.comment}不合法")
+                #end
+                #if("${field.columnType}" == "LONG")
+                @NotNull(message = "${field.comment}不能为空")
+                @Min(value = 0 , message = "${field.comment}不不合法")
+                #end
+            #else
+            /**
+             * ${field.comment}
+             */
             #end
         #end
     #end
+#end
     #if(${field.keyFlag})
     ## 主键
         #if(${field.keyIdentityFlag})

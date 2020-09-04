@@ -1,4 +1,4 @@
-package com.apl.lms.price.exp.manage.controller;
+package com.apl.lms.common.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.apl.common.pojo.dto.PageDto;
 import org.springframework.web.bind.annotation.*;
-import com.baomidou.service.CountryService;
-import com.apl.lms.common.pojo.po.CountryPo;
-import com.apl.lms.common.pojo.vo.CountryListVo;
-import com.apl.lms.common.pojo.vo.CountryInfoVo;
-import com.apl.lms.common.pojo.dto.CountryKeyDto;
+import com.baomidou.service.CountWayService;
+import com.apl.lms.common.pojo.po.CountWayPo;
+import com.apl.lms.common.pojo.vo.CountWayListVo;
+import com.apl.lms.common.pojo.vo.CountWayInfoVo;
+import com.apl.lms.common.pojo.dto.CountWayKeyDto;
 import com.apl.lib.pojo.dto.PageDto;
 import com.apl.lib.utils.ResultUtils;
 import com.apl.lib.validate.ApiParamValidate;
@@ -29,32 +29,32 @@ import javax.validation.constraints.NotNull;
  * @since 2020-09-04
  */
 @RestController
-@RequestMapping("/country")
+@RequestMapping(value = "/count_way")
 @Validated
-@Api(value = "国家",tags = "国家")
+@Api(value = "计件方式",tags = "计件方式")
 @Slf4j
-public class CountryController {
+public class CountWayController {
 
     @Autowired
-    public CountryService countryService;
+    public CountWayService countWayService;
 
 
     @PostMapping(value = "/add")
     @ApiOperation(value =  "添加", notes ="")
-    public ResultUtils<Long> add(@Validated CountryAddDto countryAddDto) {
-        ApiParamValidate.validate(countryAddDto);
+    public ResultUtils<Long> add(@Validated CountWayAddDto countWayAddDto) {
+        ApiParamValidate.validate(countWayAddDto);
 
-        return countryService.add(countryAddDto);
+        return countWayService.add(countWayAddDto);
     }
 
 
     @PostMapping(value = "/upd")
     @ApiOperation(value =  "更新",  notes ="")
-    public ResultUtils<Boolean> updById(@Validated CountryUpdDto countryUpdDto) {
-        ApiParamValidate.notEmpty("id", countryUpdDto.getId());
-        ApiParamValidate.validate(countryUpdDto);
+    public ResultUtils<Boolean> updById(@Validated CountWayUpdDto countWayUpdDto) {
+        ApiParamValidate.notEmpty("id", countWayUpdDto.getId());
+        ApiParamValidate.validate(countWayUpdDto);
 
-        return countryService.updById(countryUpdDto);
+        return countWayService.updById(countWayUpdDto);
     }
 
 
@@ -63,24 +63,24 @@ public class CountryController {
     @ApiImplicitParam(name = "id",value = " id",required = true  , paramType = "query")
     public ResultUtils<Boolean> delById(@NotNull(message = "id不能为空") @Min(value = 1 , message = "id不能小于1") Long id) {
 
-        return countryService.delById(id);
+        return countWayService.delById(id);
     }
 
 
     @PostMapping(value = "/get")
     @ApiOperation(value =  "获取详细" , notes = "获取详细")
     @ApiImplicitParam(name = "id",value = "id",required = true  , paramType = "query")
-    public ResultUtils<CountryInfoVo> selectById(@NotNull(message = "id不能为空") @Min(value = 1 , message = "id不能小于1") Long id) {
+    public ResultUtils<CountWayInfoVo> selectById(@NotNull(message = "id不能为空") @Min(value = 1 , message = "id不能小于1") Long id) {
 
-        return countryService.selectById(id);
+        return countWayService.selectById(id);
     }
 
 
-    @PostMapping("/get-list")
+    @PostMapping(value = "/get-list")
     @ApiOperation(value =  "分页查找" , notes = "分页查找")
-    public ResultUtils<Page<CountryListVo>> getList(PageDto pageDto, @Validated CountryKeyDto keyDto) {
+    public ResultUtils<Page<CountWayListVo>> getList(PageDto pageDto, @Validated CountWayKeyDto keyDto) {
 
-        return countryService.getList(pageDto , keyDto);
+        return countWayService.getList(pageDto , keyDto);
     }
 
 }

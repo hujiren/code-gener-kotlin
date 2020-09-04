@@ -1,4 +1,4 @@
-package com.apl.lms.price.exp.manage.service.impl;
+package com.apl.lms.common.service.impl;
 
 import com.apl.lib.pojo.dto.PageDto;
 import com.apl.lib.utils.ResultUtils;
@@ -6,14 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.apl.lib.constants.CommonStatusCode;
 
-import com.baomidou.mapper.CountryMapper;
-import com.baomidou.service.CountryService;
+import com.baomidou.mapper.CountWayMapper;
+import com.baomidou.service.CountWayService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.apl.lms.common.pojo.po.CountryPo;
-import com.apl.lms.common.pojo.vo.CountryListVo;
-import com.apl.lms.common.pojo.vo.CountryInfoVo;
-import com.apl.lms.common.pojo.dto.CountryKeyDto;
+import com.apl.lms.common.pojo.po.CountWayPo;
+import com.apl.lms.common.pojo.vo.CountWayListVo;
+import com.apl.lms.common.pojo.vo.CountWayInfoVo;
+import com.apl.lms.common.pojo.dto.CountWayKeyDto;
 
 import java.util.List;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
  * <p>
- * 国家 service实现类
+ * 计件方式 service实现类
  * </p>
  *
  * @author hjr
@@ -29,17 +29,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  */
 @Service
 @Slf4j
-public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> implements CountryService {
+public class CountWayServiceImpl extends ServiceImpl<CountWayMapper, CountWayPo> implements CountWayService {
 
     //状态code枚举
-    /*enum CountryServiceCode {
+    /*enum CountWayServiceCode {
 
             ;
 
             private String code;
             private String msg;
 
-            CountryServiceCode(String code, String msg) {
+            CountWayServiceCode(String code, String msg) {
                  this.code = code;
                  this.msg = msg;
             }
@@ -47,12 +47,12 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
 
 
     @Override
-    public ResultUtils<Long> add(CountryPo countryPo){
+    public ResultUtils<Long> add(CountWayPo countWayPo){
 
 
-        Integer flag = baseMapper.insert(countryPo);
+        Integer flag = baseMapper.insert(countWayPo);
         if(flag.equals(1)){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , countryPo.getId());
+            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , countWayPo.getId());
         }
 
         return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null);
@@ -60,10 +60,10 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
 
 
     @Override
-    public ResultUtils<Boolean> updById(CountryPo countryPo){
+    public ResultUtils<Boolean> updById(CountWayPo countWayPo){
 
 
-        Integer flag = baseMapper.updateById(countryPo);
+        Integer flag = baseMapper.updateById(countWayPo);
         if(flag.equals(1)){
             return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
         }
@@ -85,22 +85,22 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, CountryPo> im
 
 
     @Override
-    public ResultUtils<CountryInfoVo> selectById(Long id){
+    public ResultUtils<CountWayInfoVo> selectById(Long id){
 
-        CountryInfoVo countryInfoVo = baseMapper.getById(id);
+        CountWayInfoVo countWayInfoVo = baseMapper.getById(id);
 
-        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, countryInfoVo);
+        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, countWayInfoVo);
     }
 
 
     @Override
-    public ResultUtils<Page<CountryListVo>> getList(PageDto pageDto, CountryKeyDto keyDto){
+    public ResultUtils<Page<CountWayListVo>> getList(PageDto pageDto, CountWayKeyDto keyDto){
 
-        Page<CountryListVo> page = new Page();
+        Page<CountWayListVo> page = new Page();
         page.setCurrent(pageDto.getPageIndex());
         page.setSize(pageDto.getPageSize());
 
-        List<CountryListVo> list = baseMapper.getList(page , keyDto);
+        List<CountWayListVo> list = baseMapper.getList(page , keyDto);
         page.setRecords(list);
 
         return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS , page);

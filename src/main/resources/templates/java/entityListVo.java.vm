@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 #end
 /**
  * <p>
- * $!{table.comment}
+ * $!{table.comment} 分页返回对象
  * </p>
  *
  * @author ${author}
@@ -47,7 +47,7 @@ public class ${entity}ListVo implements Serializable {
         #if(!${field.keyFlag})
             #if(${field.name} != "inner_org_id")
                 #if(${swagger2})
-                @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}" , required = true)
+                @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}")
                     #if("${field.columnType}" == "STRING")
                     @NotEmpty(message = "${field.comment}不能为空")
                     #end

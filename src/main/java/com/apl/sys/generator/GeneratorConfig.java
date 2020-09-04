@@ -34,10 +34,10 @@ public class GeneratorConfig {
     static final String DB_URL = "jdbc:mysql://192.168.1.185:3307/pgs_lms_common?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
 
     static final String POJO_PACKAGE_NAME = "com.apl.lms.common.pojo";
-    static final String SERVICE_PACKAGE_NAME = "com.apl.lms.price.exp.manage";
-    static final String CHILD_MODULE= "lmsc-ommon";
+    static final String SERVICE_PACKAGE_NAME = "com.apl.lms.common";
+    static final String CHILD_MODULE= "lmsc-ommon";//暂时用不到
     static final String MODULE_NAME = "";
-    static String TABLE_INCLUDE =  "country"; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String TABLE_INCLUDE =  "count_way"; //表名(下划线)，不能为空;  例如：commodity_brand
     static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： country_code,name_cn
 
     static final String SYSTEM_PATH = System.getProperty("user.dir");

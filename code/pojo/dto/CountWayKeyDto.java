@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 国家 查询参数
+ * 计件方式 分页查询对象
  * </p>
  *
  * @author hjr
@@ -16,8 +16,8 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="国家 查询参数", description="国家 查询参数")
-public class CountryKeyDto implements Serializable {
+@ApiModel(value="计件方式 分页查询对象", description="计件方式 分页查询对象")
+public class CountWayKeyDto implements Serializable {
 
     private static final long serialVersionUID=1L;
 
