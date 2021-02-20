@@ -1,5 +1,5 @@
 package ${package.Service}
-import com.apl.common.utils.ResultUtils
+import com.apl.common.utils.ResultUtil
 
 import ${cfg.po}.${entity}Po
 import ${cfg.vo}.${entity}ListVo
@@ -24,7 +24,7 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
          * @author ${author}
          * @since ${date}
          */
-        fun add(${table.entityPath} : ${entity}Po): ResultUtils<*>?
+        fun add(${table.entityPath} : ${entity}Po): ResultUtil<*>?
 
 
         /**
@@ -32,7 +32,7 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
          * @author ${author}
          * @since ${date}
          */
-        fun updById(${table.entityPath} : ${entity}Po): ResultUtils<*>?
+        fun updById(${table.entityPath} : ${entity}Po): ResultUtil<*>?
 
 
         /**
@@ -40,7 +40,7 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
          * @author ${author}
          * @since ${date}
          */
-        fun delById(id : Long): ResultUtils<*>?
+        fun delById(id : Long): ResultUtil<*>?
 
 
         /**
@@ -48,7 +48,7 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
          * @author ${author}
          * @since ${date}
          */
-        fun selectById(id : Long) : ResultUtils<*>?
+        fun selectById(id : Long) : ResultUtil<*>?
 
 
         /**
@@ -56,5 +56,5 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}Po>{
          * @author ${author}
          * @since ${date}
          */
-        fun getList(pageDto : PageDto<Any> , keyDto : ${entity}KeyDto) : ResultUtils<*>?
+        fun getList(pageDto : PageDto<Any> , keyDto : ${entity}KeyDto) : ResultUtil<*>?
 }

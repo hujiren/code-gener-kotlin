@@ -1,5 +1,6 @@
 package com.apl.sys.generator;
 
+
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -35,15 +36,15 @@ public class GeneratorConfig {
 
     //postgres jdbc 修改87行
     static final String AUTHOR = "hjr";
-    static final String DB_USER = "postgres";
+    static final String DB_USER = "root";
     static final String DB_PWD = "123456";
-    static final String DB_URL = "jdbc:postgresql://192.168.1.185:5432/apl_lms_price_exp_list?characterEncoding=utf-8";
+    static final String DB_URL = "jdbc:mysql://192.168.1.185:3307/apl_lms_outstorage?characterEncoding=utf-8";
 
-    static final String POJO_PACKAGE_NAME = "com.apl.lms.price.exp.pojo";//实体类包路径
-    static final String SERVICE_PACKAGE_NAME = "com.apl.lms.price.exp.manage";//业务代码包路径
+    static final String POJO_PACKAGE_NAME = "com.apl.lms.air.transportation.pojo";//实体类包路径
+    static final String SERVICE_PACKAGE_NAME = "com.apl.lms.air.transportation";//业务代码包路径
     static final String CHILD_MODULE= "lmsc-ommon";//暂时用不到
     static final String MODULE_NAME = "";
-    static String TABLE_INCLUDE =  "price_exp_main"; //表名(下划线)，不能为空;  例如：commodity_brand
+    static String TABLE_INCLUDE =  "transfer"; //表名(下划线)，不能为空;  例如：commodity_brand
     static String EXISTS_FIELDS = ""; //不能重复的字段名(下划线)，可为空;  例如： country_code,name_cn
 
     static final String SYSTEM_PATH = System.getProperty("user.dir");
@@ -85,10 +86,10 @@ public class GeneratorConfig {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-//        dsc.setDbType(DbType.MYSQL);
-//        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setDbType(DbType.POSTGRE_SQL);
-        dsc.setDriverName("org.postgresql.Driver");
+        dsc.setDbType(DbType.MYSQL);
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+//        dsc.setDbType(DbType.POSTGRE_SQL);
+//        dsc.setDriverName("org.postgresql.Driver");
 
         dsc.setUsername(GeneratorConfig.DB_USER);
         dsc.setPassword(GeneratorConfig.DB_PWD);

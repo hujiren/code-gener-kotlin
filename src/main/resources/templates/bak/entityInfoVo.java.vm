@@ -17,15 +17,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 ## -----   导入 Accessors 去除   ----- import lombok.experimental.Accessors;
 #end
+
 /**
- *
  * @author ${author}
  * @since ${date}
  */
 @Data
 @TableName("${table.name}")
 @ApiModel(value= "", description= "")
-public class ${entity}ListVo implements Serializable {
+public class ${entity}InfoVo implements Serializable {
 #foreach($field in ${table.fields})
 
 #if(${field.keyFlag})
@@ -36,6 +36,21 @@ public class ${entity}ListVo implements Serializable {
         #if(${field.name} != "inner_org_id")
             #if(${swagger2})
     @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}")
+        #if("${field.columnType}" == "STRING")
+    @NotEmpty(message = "${field.comment}不能为空")
+        #end
+        #if("${field.columnType}" == "INTEGER")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不合法")
+        #end
+        #if("${field.columnType}" == "BIG_DECIMAL")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不合法")
+        #end
+        #if("${field.columnType}" == "LONG")
+    @NotNull(message = "${field.comment}不能为空")
+    @Min(value = 0 , message = "${field.comment}不不合法")
+        #end
             #else
             /**
              * ${field.comment}
@@ -49,6 +64,13 @@ public class ${entity}ListVo implements Serializable {
 @TableId(value = "${field.name}", type = IdType.INPUT)
     #elseif(${field.fill})
     ## -----   存在字段填充设置   -----
+        #if(${field.convert})
+    @TableField(value = "${field.name}", fill = FieldFill.${field.fill})
+        #else
+    @TableField(fill = FieldFill.${field.fill})
+        #end
+    #elseif(${field.convert})
+    @TableField("${field.name}")
     #end
 ## 乐观锁注解
     #if(${versionFieldName}==${field.name})
@@ -98,7 +120,6 @@ public class ${entity}ListVo implements Serializable {
 
     #end
 #end
-
 #if(!${entityLombokModel})
     @Override
     public String toString() {

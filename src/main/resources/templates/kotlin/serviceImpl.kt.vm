@@ -1,5 +1,5 @@
 package ${package.ServiceImpl}
-import com.apl.common.utils.ResultUtils
+import com.apl.common.utils.ResultUtil
 import lombok.extern.slf4j.Slf4j
 import org.springframework.stereotype.Service
 import com.apl.common.constants.CommonStatusCode
@@ -44,7 +44,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         }
     }*/
 
-    override fun add(${table.entityPath} : ${entity}Po) : ResultUtils<*>? {
+    override fun add(${table.entityPath} : ${entity}Po) : ResultUtil<*>? {
 
         #if(${cfg.exists_fields})
         this.exists(0L, #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end)
@@ -52,14 +52,14 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
         var flag = baseMapper.insert(${table.entityPath})
         if(flag == 1){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}.getId())
+            return ResultUtil.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}.getId())
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null)
+        return ResultUtil.APPRESULT(CommonStatusCode.SAVE_FAIL , null)
     }
 
 
-    override fun updById(${table.entityPath} : ${entity}Po) : ResultUtils<*>?  {
+    override fun updById(${table.entityPath} : ${entity}Po) : ResultUtil<*>?  {
 
         #if(${cfg.exists_fields})
             this.exists(${table.entityPath}.getId(), #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end)
@@ -67,33 +67,33 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
         var flag = baseMapper.updateById(${table.entityPath})
         if(flag == 1){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true)
+            return ResultUtil.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true)
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , false)
+        return ResultUtil.APPRESULT(CommonStatusCode.SAVE_FAIL , false)
     }
 
 
-    override fun delById(id : Long) : ResultUtils<*>?  {
+    override fun delById(id : Long) : ResultUtil<*>?  {
 
         var flag = removeById(id)
         if(flag){
-            return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true)
+            return ResultUtil.APPRESULT(CommonStatusCode.DEL_SUCCESS , true)
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , false)
+        return ResultUtil.APPRESULT(CommonStatusCode.DEL_FAIL , false)
     }
 
 
-    override fun  selectById(id : Long) : ResultUtils<*>? {
+    override fun  selectById(id : Long) : ResultUtil<*>? {
 
         var ${table.entityPath}InfoVo = baseMapper.getById(id)
 
-        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS , ${table.entityPath}InfoVo)
+        return ResultUtil.APPRESULT(CommonStatusCode.GET_SUCCESS , ${table.entityPath}InfoVo)
     }
 
 
-    override fun getList(pageDto :PageDto , keyDto : ${entity}KeyDto) : ResultUtils<*>? {
+    override fun getList(pageDto :PageDto , keyDto : ${entity}KeyDto) : ResultUtil<*>? {
 
         var page = Page<Any>()
         page.current = pageDto.getPageIndex()
@@ -105,7 +105,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
         page.records = contacts
 
-        return ResultUtils.SUCCESS(page)
+        return ResultUtil.SUCCESS(page)
     }
 
 

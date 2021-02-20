@@ -1,13 +1,13 @@
 package ${cfg.packageName}.service.impl;
 
 import com.apl.lib.pojo.dto.PageDto;
-import com.apl.lib.utils.ResultUtils;
+import com.apl.lib.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.apl.lib.constants.CommonStatusCode;
 
-import ${package.Mapper}.${table.mapperName};
-import ${package.Service}.${table.serviceName};
+import ${cfg.packageName}.${table.mapperName};
+import ${cfg.packageName}.${table.serviceName};
 import ${superServiceImplClassPackage};
 
 import ${cfg.po}.${entity}Po;
@@ -29,7 +29,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  */
 @Service
 @Slf4j
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Po> implements ${table.serviceName} {
+public class ${table.serviceImplName} implements ${table.serviceName} {
 
     //状态code枚举
     /*enum ${table.serviceName}Code {
@@ -45,9 +45,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
             }
         }*/
 
+    @Autowired
+    ${entity}Dao ${table.entityPath}Dao;
 
     @Override
-    public ResultUtils<Long> add(${entity}AddDto ${table.entityPath}AddDto){
+    public ResultUtil<Long> add(${entity}AddDto ${table.entityPath}AddDto){
 
     #if(${cfg.exists_fields})
         this.exists(0L, #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end);
@@ -56,17 +58,17 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         ${entity}Po ${table.entityPath}Po = new ${entity}Po();
         BeanUtil.copyProperties(${table.entityPath}AddDto, ${table.entityPath}Po);
 
-        Integer flag = baseMapper.insert(${table.entityPath}Po);
+        Integer flag = transferDao.add(${table.entityPath}Po);
         if(flag.equals(1)){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}Po.getId());
+            return ResultUtil.APPRESULT(CommonStatusCode.SAVE_SUCCESS , ${table.entityPath}Po.getId());
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , null);
+        return ResultUtil.APPRESULT(CommonStatusCode.SAVE_FAIL , null);
     }
 
 
     @Override
-    public ResultUtils<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto){
+    public ResultUtil<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto){
 
     #if(${cfg.exists_fields})
         this.exists(${table.entityPath}.getId(), #foreach($field in ${cfg.exists_fields})${table.entityPath}.${field.getMethodName}#if($foreach.hasNext), #end #end);
@@ -75,54 +77,54 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         ${entity}Po ${table.entityPath}Po = new ${entity}Po();
         BeanUtil.copyProperties(${table.entityPath}UpdDto, ${table.entityPath}Po);
 
-        Integer flag = baseMapper.updateById(${table.entityPath}Po);
+        Integer flag = transferDao.updById(${table.entityPath}Po);
         if(flag.equals(1)){
-            return ResultUtils.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
+            return ResultUtil.APPRESULT(CommonStatusCode.SAVE_SUCCESS , true);
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.SAVE_FAIL , false);
+        return ResultUtil.APPRESULT(CommonStatusCode.SAVE_FAIL , false);
     }
 
 
     @Override
-    public ResultUtils<Boolean> delById(Long id){
+    public ResultUtil<Boolean> delById(Long id){
 
-        Integer flag = baseMapper.deleteById(id);
+        Integer flag = transferDao.delById(id);
         if(flag > 0){
-            return ResultUtils.APPRESULT(CommonStatusCode.DEL_SUCCESS , true);
+            return ResultUtil.APPRESULT(CommonStatusCode.DEL_SUCCESS , true);
         }
 
-        return ResultUtils.APPRESULT(CommonStatusCode.DEL_FAIL , false);
+        return ResultUtil.APPRESULT(CommonStatusCode.DEL_FAIL , false);
     }
 
 
     @Override
-    public ResultUtils<${entity}InfoVo> selectById(Long id){
+    public ResultUtil<${entity}InfoVo> selectById(Long id){
 
-        ${entity}InfoVo ${table.entityPath}InfoVo = baseMapper.getById(id);
+        ${entity}InfoVo ${table.entityPath}InfoVo = transferDao.selectById(id);
 
-        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS, ${table.entityPath}InfoVo);
+        return ResultUtil.APPRESULT(CommonStatusCode.GET_SUCCESS, ${table.entityPath}InfoVo);
     }
 
 
     @Override
-    public ResultUtils<Page<${entity}ListVo>> getList(PageDto pageDto, ${entity}KeyDto keyDto){
+    public ResultUtil<Page<${entity}ListVo>> getList(PageDto pageDto, ${entity}KeyDto keyDto){
 
         Page<${entity}ListVo> page = new Page();
         page.setCurrent(pageDto.getPageIndex());
         page.setSize(pageDto.getPageSize());
 
-        List<${entity}ListVo> list = baseMapper.getList(page , keyDto);
+        List<${entity}ListVo> list = transferDao.getList(page , keyDto);
         page.setRecords(list);
 
-        return ResultUtils.APPRESULT(CommonStatusCode.GET_SUCCESS , page);
+        return ResultUtil.APPRESULT(CommonStatusCode.GET_SUCCESS , page);
     }
 
 
 #if(${cfg.exists_fields})
     void exists(Long id, #foreach($field in ${cfg.exists_fields}) String ${field.name}#if($foreach.hasNext), #end #end) {
 
-        List<${entity}InfoVo> list = baseMapper.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        List<${entity}InfoVo> list = transferDao.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
         if (!CollectionUtils.isEmpty(list)) {
         for(${entity}InfoVo  ${table.entityPath}InfoVo : list) {
 

@@ -1,4 +1,4 @@
-package com.apl.lms.price.exp.pojo.dto;
+package com.apl.lms.air.transportation.pojo.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,17 +7,12 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * <p>
- *  分页查询对象
- * </p>
- *
  * @author hjr
- * @since 2020-09-04
+ * @since 2021-02-19
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value=" 分页查询对象", description=" 分页查询对象")
-public class PriceExpMainKeyDto implements Serializable {
+@ApiModel(value= "", description= "")
+public class TransferKeyDto implements Serializable {
 
     private static final long serialVersionUID=1L;
 

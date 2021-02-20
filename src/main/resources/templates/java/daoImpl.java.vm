@@ -1,0 +1,90 @@
+package ${cfg.packageName}.dao;
+
+import com.apl.lib.pojo.dto.PageDto;
+import lombok.extern.slf4j.Slf4j;
+
+import ${cfg.packageName}.${table.mapperName};
+import ${cfg.po}.${entity}Po;
+import ${cfg.vo}.${entity}ListVo;
+import ${cfg.vo}.${entity}InfoVo;
+import ${cfg.dto}.${entity}KeyDto;
+
+import java.util.List;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.stereotype.Repository;
+
+
+/**
+ * <p>
+ * $!{table.comment} dao实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Repository
+@Slf4j
+public class ${entity}Dao extends ${superServiceImplClass}<${table.mapperName}, ${entity}Po> {
+
+
+    public Long add(${entity}AddDto ${table.entityPath}AddDto){
+
+        Integer resultInteger = baseMapper.insert(${table.entityPath}Po);
+
+        return resultInteger;
+    }
+
+
+    public Integer updById(${entity}UpdDto ${table.entityPath}UpdDto){
+
+        Integer resultInteger = baseMapper.updateById(${table.entityPath}Po);
+
+        return resultInteger;
+    }
+
+
+    public Integer delById(Long id){
+
+        Integer resultInteger = baseMapper.deleteById(id);
+
+        return resultInteger;
+    }
+
+
+    public ${entity}InfoVo selectById(Long id){
+
+        ${entity}InfoVo ${table.entityPath}InfoVo = baseMapper.getById(id);
+
+        return ${table.entityPath}InfoVo;
+    }
+
+
+    public Page<${entity}ListVo> getList(PageDto pageDto, ${entity}KeyDto keyDto){
+
+        Page<${entity}ListVo> page = new Page();
+        page.setCurrent(pageDto.getPageIndex());
+        page.setSize(pageDto.getPageSize());
+
+        List<${entity}ListVo> list = baseMapper.getList(page , keyDto);
+        page.setRecords(list);
+
+        return page;
+    }
+
+
+#if(${cfg.exists_fields})
+    void exists(Long id, #foreach($field in ${cfg.exists_fields}) String ${field.name}#if($foreach.hasNext), #end #end) {
+
+        List<${entity}InfoVo> list = baseMapper.exists(id, #foreach($field in ${cfg.exists_fields})${field.name}#if($foreach.hasNext), #end #end);
+        if (!CollectionUtils.isEmpty(list)) {
+        for(${entity}InfoVo  ${table.entityPath}InfoVo : list) {
+
+    #foreach($field in ${cfg.exists_fields})
+            if(${table.entityPath}InfoVo.${field.getMethodName}.equals(${field.name}))
+                throw new AplException("${field.upperCaseName}_EXIST", "${field.name}已经存在");
+    #end
+        }
+      }
+    }
+#end
+}

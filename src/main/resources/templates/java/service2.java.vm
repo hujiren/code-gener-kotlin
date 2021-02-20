@@ -3,10 +3,8 @@ package ${cfg.packageName}.service;
 import ${cfg.po}.${entity}Po;
 import ${cfg.vo}.${entity}ListVo;
 import ${cfg.vo}.${entity}InfoVo;
-import ${cfg.dto}.${entity}KeyDto;
-import ${superServiceClassPackage};
 import com.apl.lib.pojo.dto.PageDto;
-import com.apl.lib.utils.ResultUtils;
+import com.apl.lib.utils.ResultUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
  * <p>
@@ -16,45 +14,45 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @author ${author}
  * @since ${date}
  */
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> {
+public interface ${table.serviceName}{
 
         /**
-         * @Desc: 添加一个${entity}Po实体
+         * @Desc: 新增$!{table.comment}
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Long> add(${entity}Po ${table.entityPath}Po);
+        ResultUtil<Long> add(${entity}Po ${table.entityPath}Po);
 
 
         /**
-         * @Desc: 根据id 更新一个${entity}Po 实体
+         * @Desc: 更新$!{table.comment}
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> updById(${entity}Po ${table.entityPath}Po);
+        ResultUtil<Boolean> updById(${entity}Po ${table.entityPath}Po);
 
 
         /**
-         * @Desc: 根据id 查找一个${entity}Po 实体
+         * @Desc: 删除$!{table.comment}
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> delById(Long id);
+        ResultUtil<Boolean> delById(Long id);
 
 
         /**
-         * @Desc: 根据id 查找一个 ${entity}Po 实体
+         * @Desc: 获取详细
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}InfoVo> selectById(Long id);
+        ResultUtil<${entity}InfoVo> selectById(Long id);
 
 
         /**
-         * @Desc: 分页查找 ${entity}Po 列表
+         * @Desc: 分页查找列表
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
+        ResultUtil<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
 
 }

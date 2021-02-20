@@ -19,29 +19,13 @@ import lombok.EqualsAndHashCode;
 #end
 
 /**
- * <p>
- * $!{table.comment} 返回对象
- * </p>
- *
  * @author ${author}
  * @since ${date}
  */
-#if(${entityLombokModel})
 @Data
-#if(${superEntityClass})
-@EqualsAndHashCode(callSuper = true)
-#else
-@EqualsAndHashCode(callSuper = false)
-#end
-## -----   @Accessors去除   ----- @Accessors(chain = true)
-#end
 @TableName("${table.name}")
-#if(${swagger2})
-@ApiModel(value="$!{table.comment} 返回对象", description="$!{table.comment} 返回对象")
-#end
+@ApiModel(value= "", description= "")
 public class ${entity}InfoVo implements Serializable {
-
-## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
 #if(${field.keyFlag})
@@ -51,22 +35,7 @@ public class ${entity}InfoVo implements Serializable {
     #if(!${field.keyFlag})
         #if(${field.name} != "inner_org_id")
             #if(${swagger2})
-            @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}")
-                #if("${field.columnType}" == "STRING")
-                @NotEmpty(message = "${field.comment}不能为空")
-                #end
-                #if("${field.columnType}" == "INTEGER")
-                @NotNull(message = "${field.comment}不能为空")
-                @Min(value = 0 , message = "${field.comment}不合法")
-                #end
-                #if("${field.columnType}" == "BIG_DECIMAL")
-                @NotNull(message = "${field.comment}不能为空")
-                @Min(value = 0 , message = "${field.comment}不合法")
-                #end
-                #if("${field.columnType}" == "LONG")
-                @NotNull(message = "${field.comment}不能为空")
-                @Min(value = 0 , message = "${field.comment}不不合法")
-                #end
+    @ApiModelProperty(name = "${field.propertyName}" , value = "${field.comment}")
             #else
             /**
              * ${field.comment}
@@ -77,23 +46,8 @@ public class ${entity}InfoVo implements Serializable {
 #end
     #if(${field.keyFlag})
     ## 主键
-        #if(${field.keyIdentityFlag})
-        @TableId(value = "${field.name}", type = IdType.AUTO)
-        #elseif(!$null.isNull(${idType}) && "$!idType" != "")
-        @TableId(value = "${field.name}", type = IdType.${idType})
-        #elseif(${field.convert})
-        @TableId("${field.name}")
-        #end
-    ## 普通字段
+@TableId(value = "${field.name}", type = IdType.INPUT)
     #elseif(${field.fill})
-    ## -----   存在字段填充设置   -----
-        #if(${field.convert})
-        @TableField(value = "${field.name}", fill = FieldFill.${field.fill})
-        #else
-        @TableField(fill = FieldFill.${field.fill})
-        #end
-    #elseif(${field.convert})
-    @TableField("${field.name}")
     #end
 ## 乐观锁注解
     #if(${versionFieldName}==${field.name})
@@ -108,7 +62,6 @@ public class ${entity}InfoVo implements Serializable {
     #end
 #end
 ## ----------  END 字段循环遍历  ----------
-
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
 #end

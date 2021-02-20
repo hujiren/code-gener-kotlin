@@ -19,35 +19,17 @@ import lombok.EqualsAndHashCode;
 #end
 
 /**
- * <p>
- * $!{table.comment} 持久化对象
- * </p>
- *
  * @author ${author}
  * @since ${date}
  */
 #if(${entityLombokModel})
 @Data
-#if(${superEntityClass})
-@EqualsAndHashCode(callSuper = true)
-#else
-@EqualsAndHashCode(callSuper = false)
-#end
-## -----   @Accessors去除   ----- @Accessors(chain = true)
 #end
 @TableName("${table.name}")
 #if(${swagger2})
-@ApiModel(value="$!{table.comment} 持久化对象", description="$!{table.comment} 持久化对象")
+@ApiModel(value= "", description= "")
 #end
-#if(${superEntityClass})
-public class ${entity}Po extends ${superEntityClass}#if(${activeRecord})<${entity}Po>#end {
-#elseif(${activeRecord})
 public class ${entity}Po extends Model<${entity}Po> {
-#else
-public class ${entity}Po implements Serializable {
-#end
-
-## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
 #if(${field.keyFlag})
@@ -83,13 +65,7 @@ public class ${entity}Po implements Serializable {
 #end
 #if(${field.keyFlag})
 ## 主键
-#if(${field.keyIdentityFlag})
-    @TableId(value = "${field.name}", type = IdType.AUTO)
-#elseif(!$null.isNull(${idType}) && "$!idType" != "")
-    @TableId(value = "${field.name}", type = IdType.${idType})
-#elseif(${field.convert})
-    @TableId("${field.name}")
-#end
+    @TableId(value = "${field.name}", type = IdType.INPUT)
 ## 普通字段
 #elseif(${field.fill})
 ## -----   存在字段填充设置   -----
@@ -150,17 +126,7 @@ public class ${entity}Po implements Serializable {
 
 #end
 #end
-#if(${activeRecord})
-    @Override
-    protected Serializable pkVal() {
-#if(${keyPropertyName})
-        return this.${keyPropertyName};
-#else
-        return null;
-#end
-    }
 
-#end
 #if(!${entityLombokModel})
     @Override
     public String toString() {

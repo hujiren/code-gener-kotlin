@@ -28,7 +28,7 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Po> {
      * @Author: ${cfg.author}
      * @Date: ${cfg.nowTime}
      */
-    public ${entity}InfoVo getById(@Param("id") Long id);
+     ${entity}InfoVo getById(@Param("id") Long id);
 
     /**
      * @Desc: 查找列表

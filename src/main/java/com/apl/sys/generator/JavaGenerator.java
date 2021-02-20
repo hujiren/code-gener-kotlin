@@ -9,9 +9,6 @@ import java.util.List;
 
 public class JavaGenerator implements Generator {
 
-
-
-
     @Override
     public void genCode() {
 
@@ -90,6 +87,14 @@ public class JavaGenerator implements Generator {
             public String outputFile(TableInfo tableInfo) {
 
                 return System.getProperty("user.dir") + "/code/com/baomidou/service2/"+ tableInfo.getEntityName() + "ServiceImpl.java";
+            }
+        });
+
+        focList.add(new FileOutConfig("/templates/java/daoImpl.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+
+                return System.getProperty("user.dir") + "/code/com/baomidou/dao/"+ tableInfo.getEntityName() + "Dao.java";
             }
         });
 

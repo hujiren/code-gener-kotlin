@@ -24,7 +24,7 @@ import ${cfg.vo}.${entity}ListVo
 import ${cfg.vo}.${entity}InfoVo
 import ${cfg.dto}.${entity}KeyDto
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
-import com.apl.common.utils.ResultUtils
+import com.apl.common.utils.ResultUtil
 import com.apl.common.validate.ApiParamValidate
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
@@ -48,7 +48,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
     @PostMapping(value = ["/add"])
     @ApiOperation(value = "添加", notes = "#foreach($field in ${cfg.exists_fields})${field.upperCaseName}_EXIST -> ${field.name}已经存在#if($foreach.hasNext)\n"+
     "#end#end")
-    fun add(${table.entityPath}Po: ${entity}Po): ResultUtils<*>?  {
+    fun add(${table.entityPath}Po: ${entity}Po): ResultUtil<*>?  {
         ApiParamValidate.validate(${table.entityPath}Po)
 
         return ${table.entityPath}Service.add(${table.entityPath}Po)
@@ -58,7 +58,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
     @PostMapping(value = ["/upd"])
     @ApiOperation(value = "更新", notes = "#foreach($field in ${cfg.exists_fields})${field.upperCaseName}_EXIST -> ${field.name}已经存在#if($foreach.hasNext)\n"+
     "#end#end")
-    fun updById(${table.entityPath}Po: ${entity}Po): ResultUtils<*>?  {
+    fun updById(${table.entityPath}Po: ${entity}Po): ResultUtil<*>?  {
         ApiParamValidate.notEmpty("id", ${table.entityPath}Po.getId())
         ApiParamValidate.validate(${table.entityPath}Po)
 
@@ -69,7 +69,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
     @PostMapping(value = ["/del"])
     @ApiOperation(value = "删除", notes = "删除")
     @ApiImplicitParam(name = "id", value = " id", required = true, paramType = "query")
-    fun delById(@NotNull(message = "id不能为空") @Min(value = 1, message = "id不能小于1") id: Long): ResultUtils<*>?  {
+    fun delById(@NotNull(message = "id不能为空") @Min(value = 1, message = "id不能小于1") id: Long): ResultUtil<*>?  {
 
         return ${table.entityPath}Service.delById(id)
     }
@@ -78,7 +78,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
     @PostMapping(value = ["/get"])
     @ApiOperation(value = "获取详细", notes = "获取详细")
     @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query")
-    fun selectById(@NotNull(message = "id不能为空") @Min(value = 1, message = "id不能小于1") id: Long): ResultUtils<*>?  {
+    fun selectById(@NotNull(message = "id不能为空") @Min(value = 1, message = "id不能小于1") id: Long): ResultUtil<*>?  {
 
         return ${table.entityPath}Service.selectById(id)
     }
@@ -86,7 +86,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
 
     @PostMapping(value = ["/get-list"])
     @ApiOperation(value = "分页查找", notes = "分页查找")
-    fun getList(pageDto: PageDto, @Validated ${entity}keyDto: KeyDto): ResultUtils<*>?  {
+    fun getList(pageDto: PageDto, @Validated ${entity}keyDto: KeyDto): ResultUtil<*>?  {
 
         return ${table.entityPath}Service.getList(pageDto, keyDto)
     }

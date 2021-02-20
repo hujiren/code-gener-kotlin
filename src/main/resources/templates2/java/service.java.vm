@@ -6,7 +6,7 @@ import ${cfg.vo}.${entity}InfoVo;
 import ${cfg.dto}.${entity}KeyDto;
 import ${superServiceClassPackage};
 import com.apl.lib.pojo.dto.PageDto;
-import com.apl.lib.utils.ResultUtils;
+import com.apl.lib.utils.ResultUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
  * <p>
@@ -23,7 +23,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Long> add(${entity}AddDto ${table.entityPath}AddDto);
+        ResultUtil<Long> add(${entity}AddDto ${table.entityPath}AddDto);
 
 
         /**
@@ -31,7 +31,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto);
+        ResultUtil<Boolean> updById(${entity}UpdDto ${table.entityPath}UpdDto);
 
 
         /**
@@ -39,7 +39,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Boolean> delById(Long id);
+        ResultUtil<Boolean> delById(Long id);
 
 
         /**
@@ -47,7 +47,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<${entity}InfoVo> selectById(Long id);
+        ResultUtil<${entity}InfoVo> selectById(Long id);
 
 
         /**
@@ -55,6 +55,6 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Po> 
          * @author ${author}
          * @since ${date}
          */
-        ResultUtils<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
+        ResultUtil<Page<${entity}ListVo>>getList(PageDto pageDto, ${entity}KeyDto keyDto);
 
 }
